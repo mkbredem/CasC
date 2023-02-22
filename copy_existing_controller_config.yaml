@@ -44,6 +44,10 @@
       ansible.builtin.add_host:
         hostname: "{{ web_server }}"
     
+    - name: ping new host
+      ping:
+      delegate_to: "{{ web_server }}"
+      
     - name: where am I test
       command: hostname
       delegate_to: "{{ web_server }}"
