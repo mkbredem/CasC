@@ -50,6 +50,7 @@
       delegate_to: "{{ web_server }}"
 
     - name: where am I test
+      become: yes
       command: ls -lR /home/mbredeme
       delegate_to: "{{ web_server }}"
 
