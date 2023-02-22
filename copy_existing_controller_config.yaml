@@ -51,7 +51,7 @@
 
     - name: where am I test
       become: yes
-      command: ls -lR /home/mbredeme
+      command: pwd
       delegate_to: "{{ web_server }}"
 
     - name: Create a directory if it does not exist
