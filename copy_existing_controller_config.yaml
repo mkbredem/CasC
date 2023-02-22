@@ -40,6 +40,10 @@
     - name: view files from /tmp/filetree_output to web_server
       command: ls -lR {{ output_path }}
 
+    - name: view files from /tmp/filetree_output to web_server
+      command: hostname
+      delegate_to: "{{ web_server }}"
+
     - name: Create a directory if it does not exist
       ansible.builtin.file:
         path: /home/{{ web_server_user }}/controller_filetree
