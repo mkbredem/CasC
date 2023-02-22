@@ -4,10 +4,6 @@
   gather_facts: false
   # Play example from: https://github.com/redhat-cop/controller_configuration/tree/devel/roles/filetree_create
 
-  collections:
-    - awx.awx
-    - redhat_cop.controller_configuration
-
   vars:
     controller_username: "{{ vault_controller_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
     controller_password: "{{ vault_controller_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
