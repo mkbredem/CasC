@@ -1,7 +1,5 @@
 ---
 - hosts: localhost
-  become: true
-  become_user: ec2-user
   gather_facts: false
   # Play example from: https://github.com/redhat-cop/controller_configuration/tree/devel/roles/filetree_create
 
