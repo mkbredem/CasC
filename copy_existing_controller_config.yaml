@@ -41,13 +41,8 @@
     - redhat_cop.controller_configuration.filetree_create
 
   post_tasks:
-    - name: ensure tree is installed
-      yum:
-        name: tree
-        state: present
-
     - name: view files from /tmp/filetree_output to web_server
-      command: tree /tmp/filetree_output
+      command: ls -lR /tmp/filetree_output
 
     - name: "Delete the Authentication Token used"
       ansible.builtin.uri:
