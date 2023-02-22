@@ -39,8 +39,12 @@
   post_tasks:
     - name: view files from /tmp/filetree_output to web_server
       command: ls -lR {{ output_path }}
-
-    - name: view files from /tmp/filetree_output to web_server
+    
+    - name: Add host to play
+      ansible.builtin.add_host:
+        hostname: "{{ web_server }}"
+    
+    - name: where am I test
       command: hostname
       delegate_to: "{{ web_server }}"
 
