@@ -42,7 +42,25 @@
 
   post_tasks:
     - name: view files from /tmp/filetree_output to web_server
-      command: ls -lR /tmp/filetree_output
+      command: ls -lR {{ output_path }}
+
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /home/{{ web_server_user }}/controller_filetree
+        state: directory
+        mode: '0755'
+        owner: "{{ web_server_user }}"
+        group: "{{ web_server_user }}"
+      delegate_to: "{{ web_server }}"
+
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: "{{ output_path }}"
+        dest: /home/{{ web_server_user }}/controller_filetree
+        mode: '0755'
+        owner: "{{ web_server_user }}"
+        group: "{{ web_server_user }}"
+      delegate_to: "{{ web_server }}"
 
     - name: "Delete the Authentication Token used"
       ansible.builtin.uri:
