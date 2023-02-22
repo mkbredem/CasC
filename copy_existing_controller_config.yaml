@@ -40,19 +40,23 @@
   post_tasks:
     - name: view files from /tmp/filetree_output to web_server
       command: ls -lR {{ output_path }}
-    
+      tag: test
+      
     - name: Add host to play
       ansible.builtin.add_host:
         hostname: "{{ web_server }}"
-    
+      tag: test
+
     - name: ping new host
       ping:
       delegate_to: "{{ web_server }}"
+      tag: test
 
     - name: where am I test
       become: yes
       command: pwd
       delegate_to: "{{ web_server }}"
+      tag: test
 
     - name: Create a directory if it does not exist
       ansible.builtin.file:
