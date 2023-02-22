@@ -1,6 +1,5 @@
 ---
-- hosts: all
-  connection: local
+- hosts: localhost
   become: true
   gather_facts: false
   # Play example from: https://github.com/redhat-cop/controller_configuration/tree/devel/roles/filetree_create
