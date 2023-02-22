@@ -44,18 +44,18 @@
       ansible.builtin.file:
         path: /home/{{ web_server_user }}/controller_filetree
         state: directory
-        mode: '0755'
-        owner: "{{ web_server_user }}"
-        group: "{{ web_server_user }}"
+        # mode: '0755'
+        # owner: "{{ web_server_user }}"
+        # group: "{{ web_server_user }}"
       delegate_to: "{{ web_server }}"
 
     - name: Copy file with owner and permissions
       ansible.builtin.copy:
         src: "{{ output_path }}"
         dest: /home/{{ web_server_user }}/controller_filetree
-        mode: '0755'
-        owner: "{{ web_server_user }}"
-        group: "{{ web_server_user }}"
+        # mode: '0755'
+        # owner: "{{ web_server_user }}"
+        # group: "{{ web_server_user }}"
       delegate_to: "{{ web_server }}"
 
     - name: "Delete the Authentication Token used"
