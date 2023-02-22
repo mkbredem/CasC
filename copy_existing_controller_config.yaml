@@ -51,12 +51,12 @@
       ping:
       delegate_to: "{{ web_server }}"
       tags: test
-
-    - name: where am I test
-      become: yes
-      command: pwd
+    
+    - name: Change the working directory to somedir/ before executing the command
+      ansible.builtin.shell: pwd
+      args:
+        chdir: /home/ec2-user
       delegate_to: "{{ web_server }}"
-      tags: test
 
     - name: Create a directory if it does not exist
       ansible.builtin.file:
