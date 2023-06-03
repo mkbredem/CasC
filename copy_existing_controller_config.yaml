@@ -64,21 +64,21 @@
         # owner: "{{ web_server_user }}"
         # group: "{{ web_server_user }}"
       delegate_to: "{{ web_server }}"
-
-    - name:  Synchronization using rsync protocol on delegate host (push)
-      ansible.posix.synchronize:
+#
+#    - name:  Synchronization using rsync protocol on delegate host (push)
+#      ansible.posix.synchronize:
+#        src: "{{ output_path }}"
+#        dest: rsync://{{ web_server_user }}/home/{{ web_server_user }}/controller_filetree/
+#      delegate_to: {{ web_server_user }}
+#
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
         src: "{{ output_path }}"
-        dest: rsync://{{ web_server_user }}/home/{{ web_server_user }}/controller_filetree/
-      # delegate_to: {{ web_server_user }}
-
-    # - name: Copy file with owner and permissions
-    #   ansible.builtin.copy:
-    #     src: "{{ output_path }}"
-    #     dest: /home/{{ web_server_user }}/controller_filetree
-    #     mode: '0755'
-    #     owner: "{{ web_server_user }}"
-    #     group: "{{ web_server_user }}"
-    #   delegate_to: "{{ web_server }}"
+        dest: /home/{{ web_server_user }}/controller_filetree
+        mode: '0755'
+        owner: "{{ web_server_user }}"
+        group: "{{ web_server_user }}"
+      delegate_to: "{{ web_server }}"
 
     - name: "Delete the Authentication Token used"
       ansible.builtin.uri:
