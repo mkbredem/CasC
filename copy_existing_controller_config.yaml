@@ -4,10 +4,34 @@
   # Play example from: https://github.com/redhat-cop/controller_configuration/tree/devel/roles/filetree_create
 
   vars:
+    # pulling from variables in group_vars/all/controller_creds.yml
     controller_username: "{{ vault_controller_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
     controller_password: "{{ vault_controller_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
     controller_hostname: "{{ vault_controller_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
     controller_validate_certs: "{{ vault_controller_validate_certs | default(lookup('env', 'CONTROLLER_VERIFY_SSL')) }}"
+    # by default input_tag is ['organization', 'project']
+    input_tag: 
+      - all
+      - settings
+      - credentials
+      - credential_types
+      - execution_environments
+      - groups
+      - hosts
+      - inventory
+      - inventory_sources
+      - job_templates
+      - notification_templates
+      - organizations
+      - projects
+      - roles
+      - teams
+      - users
+      - workflow_job_templates
+      - instance_groups
+      - applications
+      - labels
+
 
   pre_tasks:
     - name: "Setup authentication (block)"
