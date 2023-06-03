@@ -1,0 +1,10 @@
+- name: see if smart inventories included with export task
+  hosts: localhost
+
+  roles:
+    - authenticate_controller
+
+  tasks:
+    - name: Export all inventories
+      export:
+        inventory: 'all'
