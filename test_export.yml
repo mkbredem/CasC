@@ -8,3 +8,7 @@
     - name: Export all inventories
       export:
         inventory: 'all'
+      register: export_content
+
+    - debug:
+        var: "{{ export_content }}""
