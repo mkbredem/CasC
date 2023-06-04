@@ -11,4 +11,4 @@
       register: export_content
 
     - debug:
-        var: "{{ export_content }}""
+        var: "{{ export_content | to_nice_yaml }}""
