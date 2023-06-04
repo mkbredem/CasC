@@ -6,7 +6,7 @@
 
   tasks:
     - name: Export all inventories
-      export:
+      ansible.controller.export:
         inventory: 'all'
       register: export_content
 
