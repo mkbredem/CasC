@@ -5,8 +5,9 @@
 
   tasks:
     - name: Authenticate into Automation Controller
-      include-role: authenticate_controller
-      
+      include-role: 
+        - name: authenticate_controller
+
     - name: Export all inventories
       ansible.controller.export:
         inventory: 'all'
