@@ -182,22 +182,22 @@ export_content:
           type: organization
         name: CasC Project
         type: project
-#    inventory:
-#    - name: AWS Running Inventory
-#      description: ''
-#      kind: ''
-#      host_filter:
-#      variables: "---"
-#      organization:
-#        name: Default
-#        type: organization
-#      related: []
-#      natural_key:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: AWS Running Inventory
-#        type: inventory
+    inventory:
+    - name: AWS Running Inventory
+      description: ''
+      kind: ''
+      host_filter:
+      variables: "---"
+      organization:
+        name: Default
+        type: organization
+      related: []
+      natural_key:
+        organization:
+          name: Default
+          type: organization
+        name: AWS Running Inventory
+        type: inventory
 #    inventory_sources:
 #    - name: AWS Running Inventory Source
 #      description: ''
