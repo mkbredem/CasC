@@ -1,12 +1,10 @@
 - name: see if smart inventories included with export task
   hosts: localhost
 
-  
-
   tasks:
     - name: Authenticate into Automation Controller
       include-role: 
-        - name: authenticate_controller
+        name: authenticate_controller
 
     - name: Export all inventories
       ansible.controller.export:
