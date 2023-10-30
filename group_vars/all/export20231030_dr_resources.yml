@@ -191,13 +191,13 @@ export_content:
       organization:
         name: Default
         type: organization
-#      related: []
-#      natural_key:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: AWS Running Inventory
-#        type: inventory
+      related: []
+      natural_key:
+        organization:
+          name: Default
+          type: organization
+        name: AWS Running Inventory
+        type: inventory
 #    inventory_sources:
 #    - name: AWS Running Inventory Source
 #      description: ''

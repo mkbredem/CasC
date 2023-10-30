@@ -1,6 +1,7 @@
 - name: Load DR Resources
   hosts: localhost
-
+  ignore_errors: True
+  
   roles:
     - authenticate_controller
 
