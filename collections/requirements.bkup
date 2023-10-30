@@ -1,0 +1,6 @@
+---
+# build custom EE with these collections or use this requirements.yml file in the project
+#collections:
+#  - ansible.controller
+#  - redhat_cop.controller_configuration
+#  - ansible.posix
