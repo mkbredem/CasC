@@ -7,4 +7,4 @@
   tasks:
     - name: Import all assets from our export
       awx.awx.import:
-        assets: "{{ export_content_2.assets }}"
+        assets: "{{ export_content.assets }}"
