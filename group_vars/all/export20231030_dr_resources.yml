@@ -413,83 +413,83 @@ export_content:
           type: organization
         name: Build Bootstrap Definitions
         type: job_template
-#    - name: Build VPC and Controller Infra
-#      description: ''
-#      job_type: run
-#      playbook: aws_create_instance.yml
-#      scm_branch: ''
-#      forks: 0
-#      limit: ''
-#      verbosity: 0
-#      extra_vars: "---\nvm_names: \n  - \"aap_demo_controller\"\nimage_name: \"rhel88\"\nvpc_prefix:
-#        \"mbredeme\"\n_instance_type_: \"m5.xlarge\"\nenv: prod"
-#      job_tags: ''
-#      force_handlers: false
-#      skip_tags: ''
-#      start_at_task: ''
-#      timeout: 0
-#      use_fact_cache: false
-#      host_config_key: ''
-#      ask_scm_branch_on_launch: false
-#      ask_diff_mode_on_launch: false
-#      ask_variables_on_launch: false
-#      ask_limit_on_launch: false
-#      ask_tags_on_launch: false
-#      ask_skip_tags_on_launch: false
-#      ask_job_type_on_launch: false
-#      ask_verbosity_on_launch: false
-#      ask_inventory_on_launch: false
-#      ask_credential_on_launch: false
-#      survey_enabled: false
-#      become_enabled: false
-#      diff_mode: false
-#      allow_simultaneous: false
-#      job_slice_count: 1
-#      webhook_service: ''
-#      webhook_credential:
-#      inventory:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: Workshop Inventory
-#        type: inventory
-#      project:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: AWS Platform
-#        type: project
-#      execution_environment:
-#        name: AWS Platform EE
-#        type: execution_environment
-#      related:
-#        labels: []
-#        credentials:
-#        - organization:
-#          name: AWS Credential
-#          credential_type:
-#            name: Amazon Web Services
-#            kind: cloud
-#            type: credential_type
-#          type: credential
-#        - organization:
-#            name: Default
-#            type: organization
-#          name: AWS Vault
-#          credential_type:
-#            name: Vault
-#            kind: vault
-#            type: credential_type
-#          type: credential
-#        - organization:
-#            name: Default
-#            type: organization
-#          name: Controller Credential
-#          credential_type:
-#            name: Red Hat Ansible Automation Platform
-#            kind: cloud
-#            type: credential_type
-#          type: credential
+    - name: Build VPC and Controller Infra
+      description: ''
+      job_type: run
+      playbook: aws_create_instance.yml
+      scm_branch: ''
+      forks: 0
+      limit: ''
+      verbosity: 0
+      extra_vars: "---\nvm_names: \n  - \"aap_demo_controller\"\nimage_name: \"rhel88\"\nvpc_prefix:
+        \"mbredeme\"\n_instance_type_: \"m5.xlarge\"\nenv: prod"
+      job_tags: ''
+      force_handlers: false
+      skip_tags: ''
+      start_at_task: ''
+      timeout: 0
+      use_fact_cache: false
+      host_config_key: ''
+      ask_scm_branch_on_launch: false
+      ask_diff_mode_on_launch: false
+      ask_variables_on_launch: false
+      ask_limit_on_launch: false
+      ask_tags_on_launch: false
+      ask_skip_tags_on_launch: false
+      ask_job_type_on_launch: false
+      ask_verbosity_on_launch: false
+      ask_inventory_on_launch: false
+      ask_credential_on_launch: false
+      survey_enabled: false
+      become_enabled: false
+      diff_mode: false
+      allow_simultaneous: false
+      job_slice_count: 1
+      webhook_service: ''
+      webhook_credential:
+      inventory:
+        organization:
+          name: Default
+          type: organization
+        name: Workshop Inventory
+        type: inventory
+      project:
+        organization:
+          name: Default
+          type: organization
+        name: AWS Platform
+        type: project
+      execution_environment:
+        name: AWS Platform EE
+        type: execution_environment
+      related:
+        labels: []
+        credentials:
+        - organization:
+          name: AWS Credential
+          credential_type:
+            name: Amazon Web Services
+            kind: cloud
+            type: credential_type
+          type: credential
+        - organization:
+            name: Default
+            type: organization
+          name: AWS Vault
+          credential_type:
+            name: Vault
+            kind: vault
+            type: credential_type
+          type: credential
+        - organization:
+            name: Default
+            type: organization
+          name: Controller Credential
+          credential_type:
+            name: Red Hat Ansible Automation Platform
+            kind: cloud
+            type: credential_type
+          type: credential
 #        - organization:
 #            name: Default
 #            type: organization
@@ -499,17 +499,17 @@ export_content:
 #            kind: ssh
 #            type: credential_type
 #          type: credential
-#        schedules: []
-#        notification_templates_started: []
-#        notification_templates_success: []
-#        notification_templates_error: []
-#        survey_spec: {}
-#      natural_key:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: Build VPC and Controller Infra
-#        type: job_template
+        schedules: []
+        notification_templates_started: []
+        notification_templates_success: []
+        notification_templates_error: []
+        survey_spec: {}
+      natural_key:
+        organization:
+          name: Default
+          type: organization
+        name: Build VPC and Controller Infra
+        type: job_template
 #    - name: Export Controller Resources
 #      description: ''
 #      job_type: run
