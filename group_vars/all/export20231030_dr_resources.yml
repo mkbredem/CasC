@@ -2,6 +2,7 @@
 export_content:
   changed: false
   assets:
+
     organizations:
     - name: Default
       description: ''
@@ -34,6 +35,7 @@ export_content:
         name: AWS Key
         kind: cloud
         type: credential_type
+
     credentials:
     - name: AWS Credential
       description: ''
@@ -329,9 +331,9 @@ export_content:
         ---
         web_server: ec2-3-93-187-216.compute-1.amazonaws.com
         web_server_user: ec2_user
-        vault_controller_username: admin
-        vault_controller_password: '<add value>'
-        vault_controller_hostname: 'student1.<id>.example.opentlc.com'
+        vault_controller_username: {{vault_controller_username}}
+        vault_controller_password: {{vault_controller_password}}
+        vault_controller_hostname: {{vault_controller_hostname}}
         vault_controller_validate_certs: false
       job_tags: ''
       force_handlers: false
