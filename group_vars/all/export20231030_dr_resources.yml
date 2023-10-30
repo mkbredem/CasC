@@ -522,9 +522,9 @@ export_content:
         ---
         web_server: ec2-3-93-187-216.compute-1.amazonaws.com
         web_server_user: ec2_user
-        vault_controller_username: admin
-        vault_controller_password: '<insert password>'
-        vault_controller_hostname: student1.cqd2b.example.opentlc.com
+        vault_controller_username: {{vault_controller_username}}
+        vault_controller_password: {{vault_controller_password}}
+        vault_controller_hostname: {{vault_controller_hostname}}
         vault_controller_validate_certs: false
       job_tags: ''
       force_handlers: false
