@@ -1,0 +1,385 @@
+assets:
+    inventory:
+    -   description: ''
+        host_filter: null
+        kind: ''
+        name: AWS Running Inventory
+        natural_key:
+            name: AWS Running Inventory
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        organization:
+            name: Default
+            type: organization
+        related:
+            groups:
+            -   description: imported
+                inventory:
+                    name: AWS Running Inventory
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: aws_ec2
+                natural_key:
+                    inventory:
+                        name: AWS Running Inventory
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: aws_ec2
+                    type: group
+                related:
+                    children: []
+                    hosts:
+                    -   inventory:
+                            name: AWS Running Inventory
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: ec2-3-93-187-216.compute-1.amazonaws.com
+                        type: host
+                    -   inventory:
+                            name: AWS Running Inventory
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: ec2-54-221-88-252.compute-1.amazonaws.com
+                        type: host
+                variables: '{}'
+            hosts:
+            -   description: imported
+                enabled: true
+                instance_id: i-0a7b9e6c3aaa86864
+                inventory:
+                    name: AWS Running Inventory
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: ec2-3-93-187-216.compute-1.amazonaws.com
+                natural_key:
+                    inventory:
+                        name: AWS Running Inventory
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: ec2-3-93-187-216.compute-1.amazonaws.com
+                    type: host
+                related:
+                    groups:
+                    -   inventory:
+                            name: AWS Running Inventory
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: aws_ec2
+                        type: group
+                variables: '{"ami_launch_index": 0, "architecture": "x86_64", "block_device_mappings":
+                    [{"device_name": "/dev/sda1", "ebs": {"attach_time": "2023-10-28T00:46:48+00:00",
+                    "delete_on_termination": true, "status": "attached", "volume_id":
+                    "vol-091779c3cda4341e8"}}], "capacity_reservation_specification":
+                    {"capacity_reservation_preference": "open"}, "client_token": "1ee692c92ddd4f298bbdbae91debddb8",
+                    "cpu_options": {"core_count": 2, "threads_per_core": 2}, "current_instance_boot_mode":
+                    "legacy-bios", "ebs_optimized": false, "ena_support": true, "enclave_options":
+                    {"enabled": false}, "hibernation_options": {"configured": false},
+                    "hypervisor": "xen", "image_id": "ami-046981daef262e1d8", "instance_id":
+                    "i-0a7b9e6c3aaa86864", "instance_type": "m5.xlarge", "key_name":
+                    "mbredemekey", "launch_time": "2023-10-28T13:59:53+00:00", "maintenance_options":
+                    {"auto_recovery": "default"}, "metadata_options": {"http_endpoint":
+                    "enabled", "http_protocol_ipv6": "disabled", "http_put_response_hop_limit":
+                    1, "http_tokens": "optional", "instance_metadata_tags": "disabled",
+                    "state": "applied"}, "monitoring": {"state": "disabled"}, "network_interfaces":
+                    [{"association": {"ip_owner_id": "amazon", "public_dns_name":
+                    "ec2-3-93-187-216.compute-1.amazonaws.com", "public_ip": "3.93.187.216"},
+                    "attachment": {"attach_time": "2023-10-28T00:46:47+00:00", "attachment_id":
+                    "eni-attach-09718ebd2f8d7adaf", "delete_on_termination": true,
+                    "device_index": 0, "network_card_index": 0, "status": "attached"},
+                    "description": "", "groups": [{"group_id": "sg-0bb37202b304f5f99",
+                    "group_name": "mbredemeSG_RHEL"}], "interface_type": "interface",
+                    "ipv6_addresses": [], "mac_address": "0a:39:61:62:6c:d9", "network_interface_id":
+                    "eni-035afbcb23b31b312", "owner_id": "399676474600", "private_dns_name":
+                    "ip-12-0-1-136.ec2.internal", "private_ip_address": "12.0.1.136",
+                    "private_ip_addresses": [{"association": {"ip_owner_id": "amazon",
+                    "public_dns_name": "ec2-3-93-187-216.compute-1.amazonaws.com",
+                    "public_ip": "3.93.187.216"}, "primary": true, "private_dns_name":
+                    "ip-12-0-1-136.ec2.internal", "private_ip_address": "12.0.1.136"}],
+                    "source_dest_check": true, "status": "in-use", "subnet_id": "subnet-018dcdf381deda30a",
+                    "vpc_id": "vpc-02a0cae4b6c74529f"}], "owner_id": "399676474600",
+                    "placement": {"availability_zone": "us-east-1a", "group_name":
+                    "", "region": "us-east-1", "tenancy": "default"}, "platform_details":
+                    "Red Hat BYOL Linux", "private_dns_name": "ip-12-0-1-136.ec2.internal",
+                    "private_dns_name_options": {"enable_resource_name_dns_a_record":
+                    false, "enable_resource_name_dns_aaaa_record": false, "hostname_type":
+                    "ip-name"}, "private_ip_address": "12.0.1.136", "product_codes":
+                    [], "public_dns_name": "ec2-3-93-187-216.compute-1.amazonaws.com",
+                    "public_ip_address": "3.93.187.216", "requester_id": "", "reservation_id":
+                    "r-09f3e38aeb7d92078", "root_device_name": "/dev/sda1", "root_device_type":
+                    "ebs", "security_groups": [{"group_id": "sg-0bb37202b304f5f99",
+                    "group_name": "mbredemeSG_RHEL"}], "source_dest_check": true,
+                    "state": {"code": 16, "name": "running"}, "state_transition_reason":
+                    "", "subnet_id": "subnet-018dcdf381deda30a", "tags": {"Name":
+                    "aap_demo_controller", "env": "prod", "operating_system": "RHEL",
+                    "owner": "mbredeme", "usage": "mbredemedemos"}, "usage_operation":
+                    "RunInstances:00g0", "usage_operation_update_time": "2023-10-28T00:46:47+00:00",
+                    "virtualization_type": "hvm", "vpc_id": "vpc-02a0cae4b6c74529f"}'
+            -   description: imported
+                enabled: true
+                instance_id: i-09d59500576631c62
+                inventory:
+                    name: AWS Running Inventory
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: ec2-54-221-88-252.compute-1.amazonaws.com
+                natural_key:
+                    inventory:
+                        name: AWS Running Inventory
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: ec2-54-221-88-252.compute-1.amazonaws.com
+                    type: host
+                related:
+                    groups:
+                    -   inventory:
+                            name: AWS Running Inventory
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: aws_ec2
+                        type: group
+                variables: '{"ami_launch_index": 0, "architecture": "x86_64", "block_device_mappings":
+                    [{"device_name": "/dev/sda1", "ebs": {"attach_time": "2023-10-28T18:31:13+00:00",
+                    "delete_on_termination": true, "status": "attached", "volume_id":
+                    "vol-00489befa2373deba"}}], "capacity_reservation_specification":
+                    {"capacity_reservation_preference": "open"}, "client_token": "3502b625dd8d4580be61a9560d6ddf00",
+                    "cpu_options": {"core_count": 2, "threads_per_core": 2}, "current_instance_boot_mode":
+                    "legacy-bios", "ebs_optimized": false, "ena_support": true, "enclave_options":
+                    {"enabled": false}, "hibernation_options": {"configured": false},
+                    "hypervisor": "xen", "image_id": "ami-046981daef262e1d8", "instance_id":
+                    "i-09d59500576631c62", "instance_type": "m5.xlarge", "key_name":
+                    "mbredemekey", "launch_time": "2023-10-28T18:31:12+00:00", "maintenance_options":
+                    {"auto_recovery": "default"}, "metadata_options": {"http_endpoint":
+                    "enabled", "http_protocol_ipv6": "disabled", "http_put_response_hop_limit":
+                    1, "http_tokens": "optional", "instance_metadata_tags": "disabled",
+                    "state": "applied"}, "monitoring": {"state": "disabled"}, "network_interfaces":
+                    [{"association": {"ip_owner_id": "amazon", "public_dns_name":
+                    "ec2-54-221-88-252.compute-1.amazonaws.com", "public_ip": "54.221.88.252"},
+                    "attachment": {"attach_time": "2023-10-28T18:31:12+00:00", "attachment_id":
+                    "eni-attach-0eee968ddc9cead38", "delete_on_termination": true,
+                    "device_index": 0, "network_card_index": 0, "status": "attached"},
+                    "description": "", "groups": [{"group_id": "sg-0a88870b149417bd9",
+                    "group_name": "mbredemeSG_RHEL"}], "interface_type": "interface",
+                    "ipv6_addresses": [], "mac_address": "0a:a1:3a:c7:d7:71", "network_interface_id":
+                    "eni-0f913dc0239022bc7", "owner_id": "399676474600", "private_dns_name":
+                    "ip-12-0-1-188.ec2.internal", "private_ip_address": "12.0.1.188",
+                    "private_ip_addresses": [{"association": {"ip_owner_id": "amazon",
+                    "public_dns_name": "ec2-54-221-88-252.compute-1.amazonaws.com",
+                    "public_ip": "54.221.88.252"}, "primary": true, "private_dns_name":
+                    "ip-12-0-1-188.ec2.internal", "private_ip_address": "12.0.1.188"}],
+                    "source_dest_check": true, "status": "in-use", "subnet_id": "subnet-029729cff0c032ca4",
+                    "vpc_id": "vpc-07578f5883a442093"}], "owner_id": "399676474600",
+                    "placement": {"availability_zone": "us-east-1a", "group_name":
+                    "", "region": "us-east-1", "tenancy": "default"}, "platform_details":
+                    "Red Hat BYOL Linux", "private_dns_name": "ip-12-0-1-188.ec2.internal",
+                    "private_dns_name_options": {"enable_resource_name_dns_a_record":
+                    false, "enable_resource_name_dns_aaaa_record": false, "hostname_type":
+                    "ip-name"}, "private_ip_address": "12.0.1.188", "product_codes":
+                    [], "public_dns_name": "ec2-54-221-88-252.compute-1.amazonaws.com",
+                    "public_ip_address": "54.221.88.252", "requester_id": "", "reservation_id":
+                    "r-0c4f591bb1fb9538a", "root_device_name": "/dev/sda1", "root_device_type":
+                    "ebs", "security_groups": [{"group_id": "sg-0a88870b149417bd9",
+                    "group_name": "mbredemeSG_RHEL"}], "source_dest_check": true,
+                    "state": {"code": 16, "name": "running"}, "state_transition_reason":
+                    "", "subnet_id": "subnet-029729cff0c032ca4", "tags": {"Name":
+                    "aap_demo_controller", "env": "prod", "operating_system": "RHEL",
+                    "owner": "mbredeme", "usage": "mbredemedemos"}, "usage_operation":
+                    "RunInstances:00g0", "usage_operation_update_time": "2023-10-28T18:31:12+00:00",
+                    "virtualization_type": "hvm", "vpc_id": "vpc-07578f5883a442093"}'
+            labels: []
+        variables: '---'
+    -   description: ''
+        host_filter: null
+        kind: ''
+        name: Workshop Inventory
+        natural_key:
+            name: Workshop Inventory
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        organization:
+            name: Default
+            type: organization
+        related:
+            groups:
+            -   description: imported
+                inventory:
+                    name: Workshop Inventory
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: attendance
+                natural_key:
+                    inventory:
+                        name: Workshop Inventory
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: attendance
+                    type: group
+                related:
+                    children: []
+                    hosts: []
+                variables: '{}'
+            -   description: imported
+                inventory:
+                    name: Workshop Inventory
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: control_nodes
+                natural_key:
+                    inventory:
+                        name: Workshop Inventory
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: control_nodes
+                    type: group
+                related:
+                    children: []
+                    hosts:
+                    -   inventory:
+                            name: Workshop Inventory
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: student1-ansible-1
+                        type: host
+                    -   inventory:
+                            name: Workshop Inventory
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: student1-automationhub
+                        type: host
+                variables: '{"ansible_port": 22, "ansible_ssh_private_key_file": "/runner/project/provisioner/cqd2b/cqd2b-private.pem",
+                    "ansible_ssh_user": "ec2-user"}'
+            -   description: imported
+                inventory:
+                    name: Workshop Inventory
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: student1
+                natural_key:
+                    inventory:
+                        name: Workshop Inventory
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: student1
+                    type: group
+                related:
+                    children: []
+                    hosts:
+                    -   inventory:
+                            name: Workshop Inventory
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: student1-automationhub
+                        type: host
+                variables: '{}'
+            hosts:
+            -   description: imported
+                enabled: true
+                instance_id: ''
+                inventory:
+                    name: Workshop Inventory
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: student1-ansible-1
+                natural_key:
+                    inventory:
+                        name: Workshop Inventory
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: student1-ansible-1
+                    type: host
+                related:
+                    groups:
+                    -   inventory:
+                            name: Workshop Inventory
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: control_nodes
+                        type: group
+                variables: '{}'
+            -   description: imported
+                enabled: true
+                instance_id: ''
+                inventory:
+                    name: Workshop Inventory
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: student1-automationhub
+                natural_key:
+                    inventory:
+                        name: Workshop Inventory
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: student1-automationhub
+                    type: host
+                related:
+                    groups:
+                    -   inventory:
+                            name: Workshop Inventory
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: control_nodes
+                        type: group
+                    -   inventory:
+                            name: Workshop Inventory
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: student1
+                        type: group
+                variables: '{"ansible_host": "3.141.47.172"}'
+            labels: []
+        variables: ''

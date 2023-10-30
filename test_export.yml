@@ -8,8 +8,8 @@
 
     - name: Export all inventories
       ansible.controller.export:
-        inventory: 'all'
+        all: True
       register: export_content
 
     - debug:
-        var: export_content | to_nice_yaml
+        var: export_content
