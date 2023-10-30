@@ -626,40 +626,40 @@ export_content:
       natural_key:
         name: CasC EE
         type: execution_environment
-#    - name: Catch All EE
-#      description: ''
-#      image: quay.io/mbredeme/custom_catchall_ee
-#      pull: always
-#      organization:
-#        name: Default
-#        type: organization
-#      credential:
-#        organization:
-#        name: Quay mbredeme
-#        credential_type:
-#          name: Container Registry
-#          kind: registry
-#          type: credential_type
-#        type: credential
-#      natural_key:
-#        name: Catch All EE
-#        type: execution_environment
-#    - name: AWS Platform EE
-#      description: ''
-#      organization:
-#      image: quay.io/mbredeme/aws_platform_ee_dr
-#      pull: missing
-#      credential:
-#        organization:
-#        name: Quay mbredeme
-#        credential_type:
-#          name: Container Registry
-#          kind: registry
-#          type: credential_type
-#        type: credential
-#      natural_key:
-#        name: AWS Platform EE
-#        type: execution_environment
+    - name: Catch All EE
+      description: ''
+      image: quay.io/mbredeme/custom_catchall_ee
+      pull: always
+      organization:
+        name: Default
+        type: organization
+      credential:
+        organization:
+        name: Quay mbredeme
+        credential_type:
+          name: Container Registry
+          kind: registry
+          type: credential_type
+        type: credential
+      natural_key:
+        name: Catch All EE
+        type: execution_environment
+    - name: AWS Platform EE
+      description: ''
+      organization:
+      image: quay.io/mbredeme/aws_platform_ee_dr
+      pull: missing
+      credential:
+        organization:
+        name: Quay mbredeme
+        credential_type:
+          name: Container Registry
+          kind: registry
+          type: credential_type
+        type: credential
+      natural_key:
+        name: AWS Platform EE
+        type: execution_environment
 #    - name: configascode workshop execution environment
 #      description: ''
 #      organization:
