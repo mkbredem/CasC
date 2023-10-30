@@ -191,7 +191,7 @@ export_content:
       organization:
         name: Default
         type: organization
-      related: []
+      related: 
       natural_key:
         organization:
           name: Default
