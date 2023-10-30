@@ -3,7 +3,7 @@
 
   tasks:
     - name: Authenticate into Automation Controller
-      include-role: 
+      include_role: 
         name: authenticate_controller
 
     - name: Export all inventories
