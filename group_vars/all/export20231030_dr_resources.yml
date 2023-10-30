@@ -523,7 +523,7 @@ export_content:
         web_server: ec2-3-93-187-216.compute-1.amazonaws.com
         web_server_user: ec2_user
         vault_controller_username: admin
-        vault_controller_password: ********
+        vault_controller_password: '<insert password>'
         vault_controller_hostname: student1.cqd2b.example.opentlc.com
         vault_controller_validate_certs: false
       job_tags: ''
@@ -607,25 +607,25 @@ export_content:
         name: Export Controller Resources
         type: job_template
 ##    workflow_job_templates: []
-#    execution_environments:
-#    - name: CasC EE
-#      description: ''
-#      image: quay.io/mbredeme/casc_ee
-#      pull: always
-#      organization:
-#        name: Default
-#        type: organization
-#      credential:
-#        organization:
-#        name: Quay mbredeme
-#        credential_type:
-#          name: Container Registry
-#          kind: registry
-#          type: credential_type
-#        type: credential
-#      natural_key:
-#        name: CasC EE
-#        type: execution_environment
+    execution_environments:
+    - name: CasC EE
+      description: ''
+      image: quay.io/mbredeme/casc_ee
+      pull: always
+      organization:
+        name: Default
+        type: organization
+      credential:
+        organization:
+        name: Quay mbredeme
+        credential_type:
+          name: Container Registry
+          kind: registry
+          type: credential_type
+        type: credential
+      natural_key:
+        name: CasC EE
+        type: execution_environment
 #    - name: Catch All EE
 #      description: ''
 #      image: quay.io/mbredeme/custom_catchall_ee
