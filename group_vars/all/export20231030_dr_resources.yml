@@ -182,565 +182,566 @@ export_content:
           type: organization
         name: CasC Project
         type: project
-    inventory:
-    - name: AWS Running Inventory
-      description: ''
-      kind: ''
-      host_filter:
-      variables: "---"
-      organization:
-        name: Default
-        type: organization
-      related: []
-      natural_key:
-        organization:
-          name: Default
-          type: organization
-        name: AWS Running Inventory
-        type: inventory
-    inventory_sources:
-    - name: AWS Running Inventory Source
-      description: ''
-      source: ec2
-      source_path: ''
-      source_vars: |-
-        ---
-        plugin: amazon.aws.aws_ec2
-        regions:
-          - us-east-1
-        filters:
-          # All instances with their state as `running`
-          instance-state-name: running
-      enabled_var: ''
-      enabled_value: ''
-      host_filter: ''
-      overwrite: false
-      overwrite_vars: false
-      timeout: 0
-      verbosity: 1
-      update_on_launch: true
-      update_cache_timeout: 0
-      source_project:
-      update_on_project_update: false
-      credential:
-        organization:
-        name: AWS Credential
-        credential_type:
-          name: Amazon Web Services
-          kind: cloud
-          type: credential_type
-        type: credential
-      execution_environment:
-        name: AWS Platform EE
-        type: execution_environment
-      inventory:
-        organization:
-          name: Default
-          type: organization
-        name: AWS Running Inventory
-        type: inventory
-      related:
-        schedules: []
-        notification_templates_started: []
-        notification_templates_success: []
-        notification_templates_error: []
-      natural_key:
-        name: AWS Running Inventory Source
-        inventory:
-          organization:
-            name: Default
-            type: organization
-          name: AWS Running Inventory
-          type: inventory
-        type: inventory_source
-    job_templates:
-    - name: Base RHEL Config
-      description: ''
-      job_type: run
-      playbook: configure-base-instance.yml
-      scm_branch: ''
-      forks: 0
-      limit: ''
-      verbosity: 1
-      extra_vars: |-
-        ---
-        target_hosts: ec2-3-93-187-216.compute-1.amazonaws.com
-      job_tags: ''
-      force_handlers: false
-      skip_tags: ''
-      start_at_task: ''
-      timeout: 0
-      use_fact_cache: false
-      host_config_key: ''
-      ask_scm_branch_on_launch: false
-      ask_diff_mode_on_launch: false
-      ask_variables_on_launch: true
-      ask_limit_on_launch: false
-      ask_tags_on_launch: false
-      ask_skip_tags_on_launch: false
-      ask_job_type_on_launch: false
-      ask_verbosity_on_launch: false
-      ask_inventory_on_launch: false
-      ask_credential_on_launch: false
-      survey_enabled: false
-      become_enabled: true
-      diff_mode: false
-      allow_simultaneous: false
-      job_slice_count: 1
-      webhook_service: ''
-      webhook_credential:
-      inventory:
-        organization:
-          name: Default
-          type: organization
-        name: AWS Running Inventory
-        type: inventory
-      project:
-        organization:
-          name: Default
-          type: organization
-        name: AWS Platform
-        type: project
-      execution_environment:
-        name: AWS Platform EE
-        type: execution_environment
-      related:
-        labels: []
-        credentials:
-        - organization:
-            name: Default
-            type: organization
-          name: AWS mbredemekey
-          credential_type:
-            name: AWS Key
-            kind: cloud
-            type: credential_type
-          type: credential
-        - organization:
-            name: Default
-            type: organization
-          name: AWS Vault
-          credential_type:
-            name: Vault
-            kind: vault
-            type: credential_type
-          type: credential
-        schedules: []
-        notification_templates_started: []
-        notification_templates_success: []
-        notification_templates_error: []
-        survey_spec: {}
-      natural_key:
-        organization:
-          name: Default
-          type: organization
-        name: Base RHEL Config
-        type: job_template
-    - name: Build Bootstrap Definitions
-      description: ''
-      job_type: run
-      playbook: copy_existing_controller_config.yaml
-      scm_branch: ''
-      forks: 0
-      limit: ''
-      verbosity: 0
-      extra_vars: |-
-        ---
-        web_server: ec2-3-93-187-216.compute-1.amazonaws.com
-        web_server_user: ec2_user
-        vault_controller_username: admin
-        vault_controller_password: ********
-        vault_controller_hostname: student1.cqd2b.example.opentlc.com
-        vault_controller_validate_certs: false
-      job_tags: ''
-      force_handlers: false
-      skip_tags: ''
-      start_at_task: ''
-      timeout: 0
-      use_fact_cache: false
-      host_config_key: ''
-      ask_scm_branch_on_launch: false
-      ask_diff_mode_on_launch: false
-      ask_variables_on_launch: false
-      ask_limit_on_launch: false
-      ask_tags_on_launch: false
-      ask_skip_tags_on_launch: false
-      ask_job_type_on_launch: false
-      ask_verbosity_on_launch: false
-      ask_inventory_on_launch: false
-      ask_credential_on_launch: false
-      survey_enabled: false
-      become_enabled: false
-      diff_mode: false
-      allow_simultaneous: false
-      job_slice_count: 1
-      webhook_service: ''
-      webhook_credential:
-      inventory:
-        organization:
-          name: Default
-          type: organization
-        name: AWS Running Inventory
-        type: inventory
-      project:
-        organization:
-          name: Default
-          type: organization
-        name: CasC Project
-        type: project
-      execution_environment:
-        name: CasC EE
-        type: execution_environment
-      related:
-        labels: []
-        credentials:
-        - organization:
-            name: Default
-            type: organization
-          name: AWS mbredemekey
-          credential_type:
-            name: AWS Key
-            kind: cloud
-            type: credential_type
-          type: credential
-        - organization:
-            name: Default
-            type: organization
-          name: AWS Vault
-          credential_type:
-            name: Vault
-            kind: vault
-            type: credential_type
-          type: credential
-        - organization:
-            name: Default
-            type: organization
-          name: Controller Credential
-          credential_type:
-            name: Red Hat Ansible Automation Platform
-            kind: cloud
-            type: credential_type
-          type: credential
-        schedules: []
-        notification_templates_started: []
-        notification_templates_success: []
-        notification_templates_error: []
-        survey_spec: {}
-      natural_key:
-        organization:
-          name: Default
-          type: organization
-        name: Build Bootstrap Definitions
-        type: job_template
-    - name: Build VPC and Controller Infra
-      description: ''
-      job_type: run
-      playbook: aws_create_instance.yml
-      scm_branch: ''
-      forks: 0
-      limit: ''
-      verbosity: 0
-      extra_vars: "---\nvm_names: \n  - \"aap_demo_controller\"\nimage_name: \"rhel88\"\nvpc_prefix:
-        \"mbredeme\"\n_instance_type_: \"m5.xlarge\"\nenv: prod"
-      job_tags: ''
-      force_handlers: false
-      skip_tags: ''
-      start_at_task: ''
-      timeout: 0
-      use_fact_cache: false
-      host_config_key: ''
-      ask_scm_branch_on_launch: false
-      ask_diff_mode_on_launch: false
-      ask_variables_on_launch: false
-      ask_limit_on_launch: false
-      ask_tags_on_launch: false
-      ask_skip_tags_on_launch: false
-      ask_job_type_on_launch: false
-      ask_verbosity_on_launch: false
-      ask_inventory_on_launch: false
-      ask_credential_on_launch: false
-      survey_enabled: false
-      become_enabled: false
-      diff_mode: false
-      allow_simultaneous: false
-      job_slice_count: 1
-      webhook_service: ''
-      webhook_credential:
-      inventory:
-        organization:
-          name: Default
-          type: organization
-        name: Workshop Inventory
-        type: inventory
-      project:
-        organization:
-          name: Default
-          type: organization
-        name: AWS Platform
-        type: project
-      execution_environment:
-        name: AWS Platform EE
-        type: execution_environment
-      related:
-        labels: []
-        credentials:
-        - organization:
-          name: AWS Credential
-          credential_type:
-            name: Amazon Web Services
-            kind: cloud
-            type: credential_type
-          type: credential
-        - organization:
-            name: Default
-            type: organization
-          name: AWS Vault
-          credential_type:
-            name: Vault
-            kind: vault
-            type: credential_type
-          type: credential
-        - organization:
-            name: Default
-            type: organization
-          name: Controller Credential
-          credential_type:
-            name: Red Hat Ansible Automation Platform
-            kind: cloud
-            type: credential_type
-          type: credential
-        - organization:
-            name: Default
-            type: organization
-          name: Workshop Credential
-          credential_type:
-            name: Machine
-            kind: ssh
-            type: credential_type
-          type: credential
-        schedules: []
-        notification_templates_started: []
-        notification_templates_success: []
-        notification_templates_error: []
-        survey_spec: {}
-      natural_key:
-        organization:
-          name: Default
-          type: organization
-        name: Build VPC and Controller Infra
-        type: job_template
-    - name: Export Controller Resources
-      description: ''
-      job_type: run
-      playbook: test_export.yml
-      scm_branch: ''
-      forks: 0
-      limit: ''
-      verbosity: 0
-      extra_vars: |-
-        ---
-        web_server: ec2-3-93-187-216.compute-1.amazonaws.com
-        web_server_user: ec2_user
-        vault_controller_username: admin
-        vault_controller_password: ********
-        vault_controller_hostname: student1.cqd2b.example.opentlc.com
-        vault_controller_validate_certs: false
-      job_tags: ''
-      force_handlers: false
-      skip_tags: ''
-      start_at_task: ''
-      timeout: 0
-      use_fact_cache: false
-      host_config_key: ''
-      ask_scm_branch_on_launch: false
-      ask_diff_mode_on_launch: false
-      ask_variables_on_launch: false
-      ask_limit_on_launch: false
-      ask_tags_on_launch: false
-      ask_skip_tags_on_launch: false
-      ask_job_type_on_launch: false
-      ask_verbosity_on_launch: false
-      ask_inventory_on_launch: false
-      ask_credential_on_launch: false
-      survey_enabled: false
-      become_enabled: false
-      diff_mode: false
-      allow_simultaneous: false
-      job_slice_count: 1
-      webhook_service: ''
-      webhook_credential:
-      inventory:
-        organization:
-          name: Default
-          type: organization
-        name: AWS Running Inventory
-        type: inventory
-      project:
-        organization:
-          name: Default
-          type: organization
-        name: CasC Project
-        type: project
-      execution_environment:
-        name: AWS Platform EE
-        type: execution_environment
-      related:
-        labels: []
-        credentials:
-        - organization:
-            name: Default
-            type: organization
-          name: AWS mbredemekey
-          credential_type:
-            name: AWS Key
-            kind: cloud
-            type: credential_type
-          type: credential
-        - organization:
-            name: Default
-            type: organization
-          name: AWS Vault
-          credential_type:
-            name: Vault
-            kind: vault
-            type: credential_type
-          type: credential
-        - organization:
-            name: Default
-            type: organization
-          name: Controller Credential
-          credential_type:
-            name: Red Hat Ansible Automation Platform
-            kind: cloud
-            type: credential_type
-          type: credential
-        schedules: []
-        notification_templates_started: []
-        notification_templates_success: []
-        notification_templates_error: []
-        survey_spec: {}
-      natural_key:
-        organization:
-          name: Default
-          type: organization
-        name: Export Controller Resources
-        type: job_template
-#    workflow_job_templates: []
-    execution_environments:
-    - name: CasC EE
-      description: ''
-      image: quay.io/mbredeme/casc_ee
-      pull: always
-      organization:
-        name: Default
-        type: organization
-      credential:
-        organization:
-        name: Quay mbredeme
-        credential_type:
-          name: Container Registry
-          kind: registry
-          type: credential_type
-        type: credential
-      natural_key:
-        name: CasC EE
-        type: execution_environment
-    - name: Catch All EE
-      description: ''
-      image: quay.io/mbredeme/custom_catchall_ee
-      pull: always
-      organization:
-        name: Default
-        type: organization
-      credential:
-        organization:
-        name: Quay mbredeme
-        credential_type:
-          name: Container Registry
-          kind: registry
-          type: credential_type
-        type: credential
-      natural_key:
-        name: Catch All EE
-        type: execution_environment
-    - name: AWS Platform EE
-      description: ''
-      organization:
-      image: quay.io/mbredeme/aws_platform_ee_dr
-      pull: missing
-      credential:
-        organization:
-        name: Quay mbredeme
-        credential_type:
-          name: Container Registry
-          kind: registry
-          type: credential_type
-        type: credential
-      natural_key:
-        name: AWS Platform EE
-        type: execution_environment
-    - name: configascode workshop execution environment
-      description: ''
-      organization:
-      image: registry.redhat.io/ansible-automation-platform-23/ee-minimal-rhel8:latest
-      credential:
-      pull: missing
-      natural_key:
-        name: configascode workshop execution environment
-        type: execution_environment
-    - name: Default execution environment
-      description: ''
-      organization:
-      image: registry.redhat.io/ansible-automation-platform-21/ee-supported-rhel8:latest
-      pull: missing
-      credential:
-        organization:
-          name: Default
-          type: organization
-        name: registry.redhat.io credential
-        credential_type:
-          name: Container Registry
-          kind: registry
-          type: credential_type
-        type: credential
-      natural_key:
-        name: Default execution environment
-        type: execution_environment
-    - name: Ansible Engine 2.9 execution environment
-      description: ''
-      organization:
-      image: registry.redhat.io/ansible-automation-platform-22/ee-29-rhel8:latest
-      pull: ''
-      credential:
-        organization:
-        name: Default Execution Environment Registry Credential
-        credential_type:
-          name: Container Registry
-          kind: registry
-          type: credential_type
-        type: credential
-      natural_key:
-        name: Ansible Engine 2.9 execution environment
-        type: execution_environment
-    - name: Minimal execution environment
-      description: ''
-      organization:
-      image: registry.redhat.io/ansible-automation-platform-22/ee-minimal-rhel8:latest
-      pull: ''
-      credential:
-        organization:
-        name: Default Execution Environment Registry Credential
-        credential_type:
-          name: Container Registry
-          kind: registry
-          type: credential_type
-        type: credential
-      natural_key:
-        name: Minimal execution environment
-        type: execution_environment
-#    applications: []
-#    schedules: []
-#  failed: false
-#_ansible_verbose_always: true
-#_ansible_no_log:
-#changed: false
+#    inventory:
+#    - name: AWS Running Inventory
+#      description: ''
+#      kind: ''
+#      host_filter:
+#      variables: "---"
+#      organization:
+#        name: Default
+#        type: organization
+#      related: []
+#      natural_key:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: AWS Running Inventory
+#        type: inventory
+#    inventory_sources:
+#    - name: AWS Running Inventory Source
+#      description: ''
+#      source: ec2
+#      source_path: ''
+#      source_vars: |-
+#        ---
+#        plugin: amazon.aws.aws_ec2
+#        regions:
+#          - us-east-1
+#        filters:
+#          # All instances with their state as `running`
+#          instance-state-name: running
+#      enabled_var: ''
+#      enabled_value: ''
+#      host_filter: ''
+#      overwrite: false
+#      overwrite_vars: false
+#      timeout: 0
+#      verbosity: 1
+#      update_on_launch: true
+#      update_cache_timeout: 0
+#      source_project:
+#      update_on_project_update: false
+#      credential:
+#        organization:
+#        name: AWS Credential
+#        credential_type:
+#          name: Amazon Web Services
+#          kind: cloud
+#          type: credential_type
+#        type: credential
+#      execution_environment:
+#        name: AWS Platform EE
+#        type: execution_environment
+#      inventory:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: AWS Running Inventory
+#        type: inventory
+#      related:
+#        schedules: []
+#        notification_templates_started: []
+#        notification_templates_success: []
+#        notification_templates_error: []
+#      natural_key:
+#        name: AWS Running Inventory Source
+#        inventory:
+#          organization:
+#            name: Default
+#            type: organization
+#          name: AWS Running Inventory
+#          type: inventory
+#        type: inventory_source
+#    job_templates:
+#    - name: Base RHEL Config
+#      description: ''
+#      job_type: run
+#      playbook: configure-base-instance.yml
+#      scm_branch: ''
+#      forks: 0
+#      limit: ''
+#      verbosity: 1
+#      extra_vars: |-
+#        ---
+#        target_hosts: ec2-3-93-187-216.compute-1.amazonaws.com
+#      job_tags: ''
+#      force_handlers: false
+#      skip_tags: ''
+#      start_at_task: ''
+#      timeout: 0
+#      use_fact_cache: false
+#      host_config_key: ''
+#      ask_scm_branch_on_launch: false
+#      ask_diff_mode_on_launch: false
+#      ask_variables_on_launch: true
+#      ask_limit_on_launch: false
+#      ask_tags_on_launch: false
+#      ask_skip_tags_on_launch: false
+#      ask_job_type_on_launch: false
+#      ask_verbosity_on_launch: false
+#      ask_inventory_on_launch: false
+#      ask_credential_on_launch: false
+#      survey_enabled: false
+#      become_enabled: true
+#      diff_mode: false
+#      allow_simultaneous: false
+#      job_slice_count: 1
+#      webhook_service: ''
+#      webhook_credential:
+#      inventory:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: AWS Running Inventory
+#        type: inventory
+#      project:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: AWS Platform
+#        type: project
+#      execution_environment:
+#        name: AWS Platform EE
+#        type: execution_environment
+#      related:
+#        labels: []
+#        credentials:
+#        - organization:
+#            name: Default
+#            type: organization
+#          name: AWS mbredemekey
+#          credential_type:
+#            name: AWS Key
+#            kind: cloud
+#            type: credential_type
+#          type: credential
+#        - organization:
+#            name: Default
+#            type: organization
+#          name: AWS Vault
+#          credential_type:
+#            name: Vault
+#            kind: vault
+#            type: credential_type
+#          type: credential
+#        schedules: []
+#        notification_templates_started: []
+#        notification_templates_success: []
+#        notification_templates_error: []
+#        survey_spec: {}
+#      natural_key:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: Base RHEL Config
+#        type: job_template
+#    - name: Build Bootstrap Definitions
+#      description: ''
+#      job_type: run
+#      playbook: copy_existing_controller_config.yaml
+#      scm_branch: ''
+#      forks: 0
+#      limit: ''
+#      verbosity: 0
+#      extra_vars: |-
+#        ---
+#        web_server: ec2-3-93-187-216.compute-1.amazonaws.com
+#        web_server_user: ec2_user
+#        vault_controller_username: admin
+#        vault_controller_password: ********
+#        vault_controller_hostname: student1.cqd2b.example.opentlc.com
+#        vault_controller_validate_certs: false
+#      job_tags: ''
+#      force_handlers: false
+#      skip_tags: ''
+#      start_at_task: ''
+#      timeout: 0
+#      use_fact_cache: false
+#      host_config_key: ''
+#      ask_scm_branch_on_launch: false
+#      ask_diff_mode_on_launch: false
+#      ask_variables_on_launch: false
+#      ask_limit_on_launch: false
+#      ask_tags_on_launch: false
+#      ask_skip_tags_on_launch: false
+#      ask_job_type_on_launch: false
+#      ask_verbosity_on_launch: false
+#      ask_inventory_on_launch: false
+#      ask_credential_on_launch: false
+#      survey_enabled: false
+#      become_enabled: false
+#      diff_mode: false
+#      allow_simultaneous: false
+#      job_slice_count: 1
+#      webhook_service: ''
+#      webhook_credential:
+#      inventory:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: AWS Running Inventory
+#        type: inventory
+#      project:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: CasC Project
+#        type: project
+#      execution_environment:
+#        name: CasC EE
+#        type: execution_environment
+#      related:
+#        labels: []
+#        credentials:
+#        - organization:
+#            name: Default
+#            type: organization
+#          name: AWS mbredemekey
+#          credential_type:
+#            name: AWS Key
+#            kind: cloud
+#            type: credential_type
+#          type: credential
+#        - organization:
+#            name: Default
+#            type: organization
+#          name: AWS Vault
+#          credential_type:
+#            name: Vault
+#            kind: vault
+#            type: credential_type
+#          type: credential
+#        - organization:
+#            name: Default
+#            type: organization
+#          name: Controller Credential
+#          credential_type:
+#            name: Red Hat Ansible Automation Platform
+#            kind: cloud
+#            type: credential_type
+#          type: credential
+#        schedules: []
+#        notification_templates_started: []
+#        notification_templates_success: []
+#        notification_templates_error: []
+#        survey_spec: {}
+#      natural_key:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: Build Bootstrap Definitions
+#        type: job_template
+#    - name: Build VPC and Controller Infra
+#      description: ''
+#      job_type: run
+#      playbook: aws_create_instance.yml
+#      scm_branch: ''
+#      forks: 0
+#      limit: ''
+#      verbosity: 0
+#      extra_vars: "---\nvm_names: \n  - \"aap_demo_controller\"\nimage_name: \"rhel88\"\nvpc_prefix:
+#        \"mbredeme\"\n_instance_type_: \"m5.xlarge\"\nenv: prod"
+#      job_tags: ''
+#      force_handlers: false
+#      skip_tags: ''
+#      start_at_task: ''
+#      timeout: 0
+#      use_fact_cache: false
+#      host_config_key: ''
+#      ask_scm_branch_on_launch: false
+#      ask_diff_mode_on_launch: false
+#      ask_variables_on_launch: false
+#      ask_limit_on_launch: false
+#      ask_tags_on_launch: false
+#      ask_skip_tags_on_launch: false
+#      ask_job_type_on_launch: false
+#      ask_verbosity_on_launch: false
+#      ask_inventory_on_launch: false
+#      ask_credential_on_launch: false
+#      survey_enabled: false
+#      become_enabled: false
+#      diff_mode: false
+#      allow_simultaneous: false
+#      job_slice_count: 1
+#      webhook_service: ''
+#      webhook_credential:
+#      inventory:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: Workshop Inventory
+#        type: inventory
+#      project:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: AWS Platform
+#        type: project
+#      execution_environment:
+#        name: AWS Platform EE
+#        type: execution_environment
+#      related:
+#        labels: []
+#        credentials:
+#        - organization:
+#          name: AWS Credential
+#          credential_type:
+#            name: Amazon Web Services
+#            kind: cloud
+#            type: credential_type
+#          type: credential
+#        - organization:
+#            name: Default
+#            type: organization
+#          name: AWS Vault
+#          credential_type:
+#            name: Vault
+#            kind: vault
+#            type: credential_type
+#          type: credential
+#        - organization:
+#            name: Default
+#            type: organization
+#          name: Controller Credential
+#          credential_type:
+#            name: Red Hat Ansible Automation Platform
+#            kind: cloud
+#            type: credential_type
+#          type: credential
+#        - organization:
+#            name: Default
+#            type: organization
+#          name: Workshop Credential
+#          credential_type:
+#            name: Machine
+#            kind: ssh
+#            type: credential_type
+#          type: credential
+#        schedules: []
+#        notification_templates_started: []
+#        notification_templates_success: []
+#        notification_templates_error: []
+#        survey_spec: {}
+#      natural_key:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: Build VPC and Controller Infra
+#        type: job_template
+#    - name: Export Controller Resources
+#      description: ''
+#      job_type: run
+#      playbook: test_export.yml
+#      scm_branch: ''
+#      forks: 0
+#      limit: ''
+#      verbosity: 0
+#      extra_vars: |-
+#        ---
+#        web_server: ec2-3-93-187-216.compute-1.amazonaws.com
+#        web_server_user: ec2_user
+#        vault_controller_username: admin
+#        vault_controller_password: ********
+#        vault_controller_hostname: student1.cqd2b.example.opentlc.com
+#        vault_controller_validate_certs: false
+#      job_tags: ''
+#      force_handlers: false
+#      skip_tags: ''
+#      start_at_task: ''
+#      timeout: 0
+#      use_fact_cache: false
+#      host_config_key: ''
+#      ask_scm_branch_on_launch: false
+#      ask_diff_mode_on_launch: false
+#      ask_variables_on_launch: false
+#      ask_limit_on_launch: false
+#      ask_tags_on_launch: false
+#      ask_skip_tags_on_launch: false
+#      ask_job_type_on_launch: false
+#      ask_verbosity_on_launch: false
+#      ask_inventory_on_launch: false
+#      ask_credential_on_launch: false
+#      survey_enabled: false
+#      become_enabled: false
+#      diff_mode: false
+#      allow_simultaneous: false
+#      job_slice_count: 1
+#      webhook_service: ''
+#      webhook_credential:
+#      inventory:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: AWS Running Inventory
+#        type: inventory
+#      project:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: CasC Project
+#        type: project
+#      execution_environment:
+#        name: AWS Platform EE
+#        type: execution_environment
+#      related:
+#        labels: []
+#        credentials:
+#        - organization:
+#            name: Default
+#            type: organization
+#          name: AWS mbredemekey
+#          credential_type:
+#            name: AWS Key
+#            kind: cloud
+#            type: credential_type
+#          type: credential
+#        - organization:
+#            name: Default
+#            type: organization
+#          name: AWS Vault
+#          credential_type:
+#            name: Vault
+#            kind: vault
+#            type: credential_type
+#          type: credential
+#        - organization:
+#            name: Default
+#            type: organization
+#          name: Controller Credential
+#          credential_type:
+#            name: Red Hat Ansible Automation Platform
+#            kind: cloud
+#            type: credential_type
+#          type: credential
+#        schedules: []
+#        notification_templates_started: []
+#        notification_templates_success: []
+#        notification_templates_error: []
+#        survey_spec: {}
+#      natural_key:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: Export Controller Resources
+#        type: job_template
+##    workflow_job_templates: []
+#    execution_environments:
+#    - name: CasC EE
+#      description: ''
+#      image: quay.io/mbredeme/casc_ee
+#      pull: always
+#      organization:
+#        name: Default
+#        type: organization
+#      credential:
+#        organization:
+#        name: Quay mbredeme
+#        credential_type:
+#          name: Container Registry
+#          kind: registry
+#          type: credential_type
+#        type: credential
+#      natural_key:
+#        name: CasC EE
+#        type: execution_environment
+#    - name: Catch All EE
+#      description: ''
+#      image: quay.io/mbredeme/custom_catchall_ee
+#      pull: always
+#      organization:
+#        name: Default
+#        type: organization
+#      credential:
+#        organization:
+#        name: Quay mbredeme
+#        credential_type:
+#          name: Container Registry
+#          kind: registry
+#          type: credential_type
+#        type: credential
+#      natural_key:
+#        name: Catch All EE
+#        type: execution_environment
+#    - name: AWS Platform EE
+#      description: ''
+#      organization:
+#      image: quay.io/mbredeme/aws_platform_ee_dr
+#      pull: missing
+#      credential:
+#        organization:
+#        name: Quay mbredeme
+#        credential_type:
+#          name: Container Registry
+#          kind: registry
+#          type: credential_type
+#        type: credential
+#      natural_key:
+#        name: AWS Platform EE
+#        type: execution_environment
+#    - name: configascode workshop execution environment
+#      description: ''
+#      organization:
+#      image: registry.redhat.io/ansible-automation-platform-23/ee-minimal-rhel8:latest
+#      credential:
+#      pull: missing
+#      natural_key:
+#        name: configascode workshop execution environment
+#        type: execution_environment
+#    - name: Default execution environment
+#      description: ''
+#      organization:
+#      image: registry.redhat.io/ansible-automation-platform-21/ee-supported-rhel8:latest
+#      pull: missing
+#      credential:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: registry.redhat.io credential
+#        credential_type:
+#          name: Container Registry
+#          kind: registry
+#          type: credential_type
+#        type: credential
+#      natural_key:
+#        name: Default execution environment
+#        type: execution_environment
+#    - name: Ansible Engine 2.9 execution environment
+#      description: ''
+#      organization:
+#      image: registry.redhat.io/ansible-automation-platform-22/ee-29-rhel8:latest
+#      pull: ''
+#      credential:
+#        organization:
+#        name: Default Execution Environment Registry Credential
+#        credential_type:
+#          name: Container Registry
+#          kind: registry
+#          type: credential_type
+#        type: credential
+#      natural_key:
+#        name: Ansible Engine 2.9 execution environment
+#        type: execution_environment
+#    - name: Minimal execution environment
+#      description: ''
+#      organization:
+#      image: registry.redhat.io/ansible-automation-platform-22/ee-minimal-rhel8:latest
+#      pull: ''
+#      credential:
+#        organization:
+#        name: Default Execution Environment Registry Credential
+#        credential_type:
+#          name: Container Registry
+#          kind: registry
+#          type: credential_type
+#        type: credential
+#      natural_key:
+#        name: Minimal execution environment
+#        type: execution_environment
+##    applications: []
+##    schedules: []
+##  failed: false
+##_ansible_verbose_always: true
+##_ansible_no_log:
+##changed: false
+#
