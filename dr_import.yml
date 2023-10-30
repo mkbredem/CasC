@@ -1,0 +1,10 @@
+- name: Load DR Resources
+  hosts: localhost
+
+  roles:
+    - authenticate_controller
+
+  tasks:
+    - name: Import all assets from our export
+      import:
+        assets: "{{ export_content.assets }}"
