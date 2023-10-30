@@ -179,115 +179,115 @@ export_content:
           type: organization
         name: AWS Running Inventory
         type: inventory
-#    inventory_sources:
-#    - name: AWS Running Inventory Source
-#      description: ''
-#      source: ec2
-#      source_path: ''
-#      source_vars: |-
-#        ---
-#        plugin: amazon.aws.aws_ec2
-#        regions:
-#          - us-east-1
-#        filters:
-#          # All instances with their state as `running`
-#          instance-state-name: running
-#      enabled_var: ''
-#      enabled_value: ''
-#      host_filter: ''
-#      overwrite: false
-#      overwrite_vars: false
-#      timeout: 0
-#      verbosity: 1
-#      update_on_launch: true
-#      update_cache_timeout: 0
-#      source_project:
-#      update_on_project_update: false
-#      credential:
-#        organization:
-#        name: AWS Credential
-#        credential_type:
-#          name: Amazon Web Services
-#          kind: cloud
-#          type: credential_type
-#        type: credential
-#      execution_environment:
-#        name: AWS Platform EE
-#        type: execution_environment
-#      inventory:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: AWS Running Inventory
-#        type: inventory
+    inventory_sources:
+    - name: AWS Running Inventory Source
+      description: ''
+      source: ec2
+      source_path: ''
+      source_vars: |-
+        ---
+        plugin: amazon.aws.aws_ec2
+        regions:
+          - us-east-1
+        filters:
+          # All instances with their state as `running`
+          instance-state-name: running
+      enabled_var: ''
+      enabled_value: ''
+      host_filter: ''
+      overwrite: false
+      overwrite_vars: false
+      timeout: 0
+      verbosity: 1
+      update_on_launch: true
+      update_cache_timeout: 0
+      source_project:
+      update_on_project_update: false
+      credential:
+        organization:
+        name: AWS Credential
+        credential_type:
+          name: Amazon Web Services
+          kind: cloud
+          type: credential_type
+        type: credential
+      execution_environment:
+        name: AWS Platform EE
+        type: execution_environment
+      inventory:
+        organization:
+          name: Default
+          type: organization
+        name: AWS Running Inventory
+        type: inventory
 #      related:
 #        schedules: []
 #        notification_templates_started: []
 #        notification_templates_success: []
 #        notification_templates_error: []
-#      natural_key:
-#        name: AWS Running Inventory Source
-#        inventory:
-#          organization:
-#            name: Default
-#            type: organization
-#          name: AWS Running Inventory
-#          type: inventory
-#        type: inventory_source
-#    job_templates:
-#    - name: Base RHEL Config
-#      description: ''
-#      job_type: run
-#      playbook: configure-base-instance.yml
-#      scm_branch: ''
-#      forks: 0
-#      limit: ''
-#      verbosity: 1
-#      extra_vars: |-
-#        ---
-#        target_hosts: ec2-3-93-187-216.compute-1.amazonaws.com
-#      job_tags: ''
-#      force_handlers: false
-#      skip_tags: ''
-#      start_at_task: ''
-#      timeout: 0
-#      use_fact_cache: false
-#      host_config_key: ''
-#      ask_scm_branch_on_launch: false
-#      ask_diff_mode_on_launch: false
-#      ask_variables_on_launch: true
-#      ask_limit_on_launch: false
-#      ask_tags_on_launch: false
-#      ask_skip_tags_on_launch: false
-#      ask_job_type_on_launch: false
-#      ask_verbosity_on_launch: false
-#      ask_inventory_on_launch: false
-#      ask_credential_on_launch: false
-#      survey_enabled: false
-#      become_enabled: true
-#      diff_mode: false
-#      allow_simultaneous: false
-#      job_slice_count: 1
-#      webhook_service: ''
-#      webhook_credential:
-#      inventory:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: AWS Running Inventory
-#        type: inventory
-#      project:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: AWS Platform
-#        type: project
-#      execution_environment:
-#        name: AWS Platform EE
-#        type: execution_environment
-#      related:
-#        labels: []
-#        credentials:
+      natural_key:
+        name: AWS Running Inventory Source
+        inventory:
+          organization:
+            name: Default
+            type: organization
+          name: AWS Running Inventory
+          type: inventory
+        type: inventory_source
+    job_templates:
+    - name: Base RHEL Config
+      description: ''
+      job_type: run
+      playbook: configure-base-instance.yml
+      scm_branch: ''
+      forks: 0
+      limit: ''
+      verbosity: 1
+      extra_vars: |-
+        ---
+        target_hosts: ec2-3-93-187-216.compute-1.amazonaws.com
+      job_tags: ''
+      force_handlers: false
+      skip_tags: ''
+      start_at_task: ''
+      timeout: 0
+      use_fact_cache: false
+      host_config_key: ''
+      ask_scm_branch_on_launch: false
+      ask_diff_mode_on_launch: false
+      ask_variables_on_launch: true
+      ask_limit_on_launch: false
+      ask_tags_on_launch: false
+      ask_skip_tags_on_launch: false
+      ask_job_type_on_launch: false
+      ask_verbosity_on_launch: false
+      ask_inventory_on_launch: false
+      ask_credential_on_launch: false
+      survey_enabled: false
+      become_enabled: true
+      diff_mode: false
+      allow_simultaneous: false
+      job_slice_count: 1
+      webhook_service: ''
+      webhook_credential:
+      inventory:
+        organization:
+          name: Default
+          type: organization
+        name: AWS Running Inventory
+        type: inventory
+      project:
+        organization:
+          name: Default
+          type: organization
+        name: AWS Platform
+        type: project
+      execution_environment:
+        name: AWS Platform EE
+        type: execution_environment
+      related:
+        labels: []
+        credentials:
 #        - organization:
 #            name: Default
 #            type: organization
@@ -297,26 +297,26 @@ export_content:
 #            kind: cloud
 #            type: credential_type
 #          type: credential
-#        - organization:
-#            name: Default
-#            type: organization
-#          name: AWS Vault
-#          credential_type:
-#            name: Vault
-#            kind: vault
-#            type: credential_type
-#          type: credential
+        - organization:
+            name: Default
+            type: organization
+          name: AWS Vault
+          credential_type:
+            name: Vault
+            kind: vault
+            type: credential_type
+          type: credential
 #        schedules: []
 #        notification_templates_started: []
 #        notification_templates_success: []
 #        notification_templates_error: []
 #        survey_spec: {}
-#      natural_key:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: Base RHEL Config
-#        type: job_template
+      natural_key:
+        organization:
+          name: Default
+          type: organization
+        name: Base RHEL Config
+        type: job_template
 #    - name: Build Bootstrap Definitions
 #      description: ''
 #      job_type: run
