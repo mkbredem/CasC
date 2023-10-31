@@ -32,9 +32,9 @@ export_content:
         - aws_ssh_key
       injectors: 
         file:
-          template: "{{aws_ssh_key}} | quote }}"
+          template: "{{ {{aws_ssh_key}} | quote }}"
         extra_vars:
-          aws_key_file: "{{ ' {{tower.filename}} ' | quote }}"
+          aws_key_file: "{{ {{tower.filename}} | quote }}"
           aws_username: "{{ ' {{awsusername}} ' | quote }}"
 
       natural_key:
