@@ -32,25 +32,15 @@ export_content:
         - aws_ssh_key
       injectors:
         file:
-          template: "{{aws_ssh_key}}"
-        extra_vars:
-          aws_key_file: "{{tower.filename}}"
-          aws_username: "{{awsusername}}"
-      natural_key:
-        name: AWS Key
-        kind: cloud
-        type: credential_type
-#      injectors: 
-#        file:
-#          template: "{{ '{{aws_ssh_key}}' | quote }}"
+          template: '{{ "{{aws_ssh_key}}" }}'
 #        extra_vars:
-#          aws_key_file: "{{ {{tower.filename}} | quote }}"
-#          aws_username: "{{ ' {{awsusername}} ' | quote }}"
+#          aws_key_file: "{{tower.filename}}"
+#          aws_username: "{{awsusername}}"
+#      natural_key:
+#        name: AWS Key
+#        kind: cloud
+#        type: credential_type
 
-      natural_key:
-        name: AWS Key
-        kind: cloud
-        type: credential_type
 
     credentials:
     - name: AWS Credential
