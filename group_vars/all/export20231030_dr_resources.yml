@@ -33,13 +33,13 @@ export_content:
       injectors:
         file:
           template: '{{ "{{aws_ssh_key}}" }}'
-#        extra_vars:
-#          aws_key_file: "{{tower.filename}}"
-#          aws_username: "{{awsusername}}"
-#      natural_key:
-#        name: AWS Key
-#        kind: cloud
-#        type: credential_type
+        extra_vars:
+          aws_key_file: '{{ "{{tower.filename}}" }}'
+          aws_username: '{{ "{{awsusername}}" }}'
+      natural_key:
+        name: AWS Key
+        kind: cloud
+        type: credential_type
 
 
     credentials:
