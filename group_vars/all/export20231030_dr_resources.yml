@@ -32,10 +32,10 @@ export_content:
         - aws_ssh_key
       injectors: 
         file:
-          template: \'\{\{aws_ssh_key\}\}\'
+          template: '"{{aws_ssh_key}}"''
         extra_vars:
-          aws_key_file: \'\{\{tower.filename\}\}\'
-          aws_username: \'\{\{awsusername\}\}\'
+          aws_key_file: \'{{tower.filename}}\'
+          aws_username: \'{{awsusername}}\'
 
       natural_key:
         name: AWS Key
