@@ -30,7 +30,13 @@ export_content:
         required:
         - awsusername
         - aws_ssh_key
-      injectors: {}
+      injectors: 
+        file:
+          template: '{{aws_ssh_key}}'
+        extra_vars:
+          aws_key_file: '{{tower.filename}}'
+          aws_username: '{{awsusername}}'
+
       natural_key:
         name: AWS Key
         kind: cloud
@@ -333,7 +339,7 @@ export_content:
       extra_vars: |-
         ---
         web_server: ec2-3-93-187-216.compute-1.amazonaws.com
-        web_server_user: ec2_user
+        web_server_user: ec2-user
         vault_controller_username: {{vault_controller_username}}
         vault_controller_password: {{vault_controller_password}}
         vault_controller_hostname: {{vault_controller_hostname}}
@@ -526,7 +532,7 @@ export_content:
       extra_vars: |-
         ---
         web_server: ec2-3-93-187-216.compute-1.amazonaws.com
-        web_server_user: ec2_user
+        web_server_user: ec2-user
         vault_controller_username: {{vault_controller_username}}
         vault_controller_password: {{vault_controller_password}}
         vault_controller_hostname: {{vault_controller_hostname}}
