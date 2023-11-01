@@ -40,6 +40,29 @@ export_content:
         name: AWS Key
         kind: cloud
         type: credential_type
+    - name: Portal Credential Type
+      description: ''
+      kind: cloud
+      inputs:
+        fields:
+        - id: portal_username
+          type: string
+          label: RH Portal Username
+        - id: portal_password
+          type: string
+          label: RH Portal Password
+          secret: true
+        required:
+        - portal_username
+        - portal_password
+      injectors:
+        env:
+          PORTAL_PASSWORD: '{{ "{{ portal_password }}" }}'
+          PORTAL_USERNAME: '{{ "{{ portal_username }}" }}'
+      natural_key:
+        name: Portal Credential Type
+        kind: cloud
+        type: credential_type
 
 
     credentials:

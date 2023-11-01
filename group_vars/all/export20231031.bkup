@@ -47,14 +47,6 @@ export_content:
           type: role
           content_object:
             organization:
-              name: Default
-              type: organization
-            name: Base RHEL Config @ 03:25 PM
-            type: job_template
-        - name: Admin
-          type: role
-          content_object:
-            organization:
             name: AWS Credential
             credential_type:
               name: Amazon Web Services
@@ -75,6 +67,24 @@ export_content:
           type: role
       natural_key:
         username: admin
+        type: user
+    - username: alex
+      first_name: Alex
+      last_name: ''
+      email: ''
+      is_superuser: true
+      is_system_auditor: false
+      related:
+        roles:
+        - name: Member
+          type: role
+          content_object:
+            name: Default
+            type: organization
+        - name: System Administrator
+          type: role
+      natural_key:
+        username: alex
         type: user
     - username: student1
       first_name: ''
@@ -145,6 +155,29 @@ export_content:
         name: AWS Key
         kind: cloud
         type: credential_type
+    - name: Portal Credential Type
+      description: ''
+      kind: cloud
+      inputs:
+        fields:
+        - id: portal_username
+          type: string
+          label: RH Portal Username
+        - id: portal_password
+          type: string
+          label: RH Portal Password
+          secret: true
+        required:
+        - portal_username
+        - portal_password
+      injectors:
+        extra_vars:
+          PORTAL_PASSWORD: "{{ portal_password }}"
+          PORTAL_USERNAME: "{{ portal_username }}"
+      natural_key:
+        name: Portal Credential Type
+        kind: cloud
+        type: credential_type
     credentials:
     - name: AWS Credential
       description: ''
@@ -172,8 +205,8 @@ export_content:
       inputs:
         username: ec2-user
         ssh_key_data: ''
-        become_method: ''
-        become_username: ''
+        become_method: sudo
+        become_username: root
       organization:
         name: Default
         type: organization
@@ -194,14 +227,14 @@ export_content:
     - name: AWS mbredemekey
       description: ''
       inputs:
-        aws_ssh_key: ''
-        awsusername: ec2-user
+        username: ec2-user
+        ssh_key_data: ''
       organization:
         name: Default
         type: organization
       credential_type:
-        name: AWS Key
-        kind: cloud
+        name: Machine
+        kind: ssh
         type: credential_type
       natural_key:
         organization:
@@ -209,8 +242,8 @@ export_content:
           type: organization
         name: AWS mbredemekey
         credential_type:
-          name: AWS Key
-          kind: cloud
+          name: Machine
+          kind: ssh
           type: credential_type
         type: credential
     - name: AWS Vault
@@ -255,6 +288,28 @@ export_content:
         name: Controller Credential
         credential_type:
           name: Red Hat Ansible Automation Platform
+          kind: cloud
+          type: credential_type
+        type: credential
+    - name: Portal Credential
+      description: ''
+      inputs:
+        portal_password: ''
+        portal_username: mbredeme
+      organization:
+        name: Default
+        type: organization
+      credential_type:
+        name: Portal Credential Type
+        kind: cloud
+        type: credential_type
+      natural_key:
+        organization:
+          name: Default
+          type: organization
+        name: Portal Credential
+        credential_type:
+          name: Portal Credential Type
           kind: cloud
           type: credential_type
         type: credential
@@ -421,53 +476,53 @@ export_content:
         type: organization
       related:
         hosts:
-        - name: ec2-44-192-122-103.compute-1.amazonaws.com
+        - name: ec2-3-238-101-82.compute-1.amazonaws.com
           description: imported
           enabled: true
-          instance_id: i-049fa44a72b6015bf
+          instance_id: i-0202c78c5f3ad7976
           variables: '{"ami_launch_index": 0, "architecture": "x86_64", "block_device_mappings":
-            [{"device_name": "/dev/sda1", "ebs": {"attach_time": "2023-10-31T17:04:32+00:00",
-            "delete_on_termination": true, "status": "attached", "volume_id": "vol-037dd7b89a77b39d1"}}],
+            [{"device_name": "/dev/sda1", "ebs": {"attach_time": "2023-10-31T20:51:56+00:00",
+            "delete_on_termination": true, "status": "attached", "volume_id": "vol-0d063702454ad8c33"}}],
             "capacity_reservation_specification": {"capacity_reservation_preference":
-            "open"}, "client_token": "55ff24154cbf4664b27eb7abd9da4949", "cpu_options":
+            "open"}, "client_token": "cf365a255b704c83938eefafd1614ab3", "cpu_options":
             {"core_count": 2, "threads_per_core": 2}, "current_instance_boot_mode":
             "legacy-bios", "ebs_optimized": false, "ena_support": true, "enclave_options":
             {"enabled": false}, "hibernation_options": {"configured": false}, "hypervisor":
-            "xen", "image_id": "ami-046981daef262e1d8", "instance_id": "i-049fa44a72b6015bf",
+            "xen", "image_id": "ami-046981daef262e1d8", "instance_id": "i-0202c78c5f3ad7976",
             "instance_type": "m5.xlarge", "key_name": "mbredemekey", "launch_time":
-            "2023-10-31T17:04:31+00:00", "maintenance_options": {"auto_recovery":
+            "2023-10-31T20:51:56+00:00", "maintenance_options": {"auto_recovery":
             "default"}, "metadata_options": {"http_endpoint": "enabled", "http_protocol_ipv6":
             "disabled", "http_put_response_hop_limit": 1, "http_tokens": "optional",
             "instance_metadata_tags": "disabled", "state": "applied"}, "monitoring":
             {"state": "disabled"}, "network_interfaces": [{"association": {"ip_owner_id":
-            "amazon", "public_dns_name": "ec2-44-192-122-103.compute-1.amazonaws.com",
-            "public_ip": "44.192.122.103"}, "attachment": {"attach_time": "2023-10-31T17:04:31+00:00",
-            "attachment_id": "eni-attach-04f90e50914e3053f", "delete_on_termination":
+            "amazon", "public_dns_name": "ec2-3-238-101-82.compute-1.amazonaws.com",
+            "public_ip": "3.238.101.82"}, "attachment": {"attach_time": "2023-10-31T20:51:56+00:00",
+            "attachment_id": "eni-attach-0fb9d6de0c7f273c0", "delete_on_termination":
             true, "device_index": 0, "network_card_index": 0, "status": "attached"},
             "description": "", "groups": [{"group_id": "sg-08582304bb057ef26", "group_name":
             "mbredemeSG_RHEL"}], "interface_type": "interface", "ipv6_addresses":
-            [], "mac_address": "02:c7:d7:2a:2b:9f", "network_interface_id": "eni-05ac6bd7d879d9078",
-            "owner_id": "399676474600", "private_dns_name": "ip-12-0-1-62.ec2.internal",
-            "private_ip_address": "12.0.1.62", "private_ip_addresses": [{"association":
-            {"ip_owner_id": "amazon", "public_dns_name": "ec2-44-192-122-103.compute-1.amazonaws.com",
-            "public_ip": "44.192.122.103"}, "primary": true, "private_dns_name": "ip-12-0-1-62.ec2.internal",
-            "private_ip_address": "12.0.1.62"}], "source_dest_check": true, "status":
+            [], "mac_address": "02:37:e1:f5:e0:81", "network_interface_id": "eni-0e6c3ae5b3c0af7b7",
+            "owner_id": "399676474600", "private_dns_name": "ip-12-0-1-153.ec2.internal",
+            "private_ip_address": "12.0.1.153", "private_ip_addresses": [{"association":
+            {"ip_owner_id": "amazon", "public_dns_name": "ec2-3-238-101-82.compute-1.amazonaws.com",
+            "public_ip": "3.238.101.82"}, "primary": true, "private_dns_name": "ip-12-0-1-153.ec2.internal",
+            "private_ip_address": "12.0.1.153"}], "source_dest_check": true, "status":
             "in-use", "subnet_id": "subnet-08b641931e3cf427f", "vpc_id": "vpc-0e75651dee3db7ec7"}],
             "owner_id": "399676474600", "placement": {"availability_zone": "us-east-1c",
             "group_name": "", "region": "us-east-1", "tenancy": "default"}, "platform_details":
-            "Red Hat BYOL Linux", "private_dns_name": "ip-12-0-1-62.ec2.internal",
+            "Red Hat BYOL Linux", "private_dns_name": "ip-12-0-1-153.ec2.internal",
             "private_dns_name_options": {"enable_resource_name_dns_a_record": false,
             "enable_resource_name_dns_aaaa_record": false, "hostname_type": "ip-name"},
-            "private_ip_address": "12.0.1.62", "product_codes": [], "public_dns_name":
-            "ec2-44-192-122-103.compute-1.amazonaws.com", "public_ip_address": "44.192.122.103",
-            "requester_id": "", "reservation_id": "r-068a23de5635e330c", "root_device_name":
+            "private_ip_address": "12.0.1.153", "product_codes": [], "public_dns_name":
+            "ec2-3-238-101-82.compute-1.amazonaws.com", "public_ip_address": "3.238.101.82",
+            "requester_id": "", "reservation_id": "r-002bfa2a1aca254ef", "root_device_name":
             "/dev/sda1", "root_device_type": "ebs", "security_groups": [{"group_id":
             "sg-08582304bb057ef26", "group_name": "mbredemeSG_RHEL"}], "source_dest_check":
             true, "state": {"code": 16, "name": "running"}, "state_transition_reason":
             "", "subnet_id": "subnet-08b641931e3cf427f", "tags": {"Name": "aap_demo_controller",
             "env": "prod", "operating_system": "RHEL", "owner": "mbredeme", "usage":
             "mbredemedemos"}, "usage_operation": "RunInstances:00g0", "usage_operation_update_time":
-            "2023-10-31T17:04:31+00:00", "virtualization_type": "hvm", "vpc_id": "vpc-0e75651dee3db7ec7"}'
+            "2023-10-31T20:51:56+00:00", "virtualization_type": "hvm", "vpc_id": "vpc-0e75651dee3db7ec7"}'
           inventory:
             organization:
               name: Default
@@ -485,7 +540,7 @@ export_content:
                 type: inventory
               type: group
           natural_key:
-            name: ec2-44-192-122-103.compute-1.amazonaws.com
+            name: ec2-3-238-101-82.compute-1.amazonaws.com
             inventory:
               organization:
                 name: Default
@@ -505,7 +560,7 @@ export_content:
             type: inventory
           related:
             hosts:
-            - name: ec2-44-192-122-103.compute-1.amazonaws.com
+            - name: ec2-3-238-101-82.compute-1.amazonaws.com
               inventory:
                 organization:
                   name: Default
@@ -808,7 +863,11 @@ export_content:
       verbosity: 1
       extra_vars: |-
         ---
-        target_hosts: ec2-44-192-122-103.compute-1.amazonaws.com
+        target_hosts: ec2-3-238-101-82.compute-1.amazonaws.com
+        subscription_name: rhel_development_teams
+        app_tag: utility
+        env_tag: dev
+        name_tag: aap_demo
       job_tags: ''
       force_handlers: false
       skip_tags: ''
@@ -856,88 +915,6 @@ export_content:
             type: organization
           name: AWS mbredemekey
           credential_type:
-            name: AWS Key
-            kind: cloud
-            type: credential_type
-          type: credential
-        - organization:
-            name: Default
-            type: organization
-          name: AWS Vault
-          credential_type:
-            name: Vault
-            kind: vault
-            type: credential_type
-          type: credential
-        schedules: []
-        notification_templates_started: []
-        notification_templates_success: []
-        notification_templates_error: []
-        survey_spec: {}
-      natural_key:
-        organization:
-          name: Default
-          type: organization
-        name: Base RHEL Config
-        type: job_template
-    - name: Base RHEL Config @ 03:25 PM
-      description: ''
-      job_type: run
-      playbook: configure-base-instance.yml
-      scm_branch: ''
-      forks: 0
-      limit: ''
-      verbosity: 2
-      extra_vars: |-
-        ---
-        target_hosts: ec2-44-192-122-103.compute-1.amazonaws.com
-      job_tags: ''
-      force_handlers: false
-      skip_tags: ''
-      start_at_task: ''
-      timeout: 0
-      use_fact_cache: false
-      host_config_key: ''
-      ask_scm_branch_on_launch: false
-      ask_diff_mode_on_launch: false
-      ask_variables_on_launch: true
-      ask_limit_on_launch: false
-      ask_tags_on_launch: false
-      ask_skip_tags_on_launch: false
-      ask_job_type_on_launch: false
-      ask_verbosity_on_launch: false
-      ask_inventory_on_launch: false
-      ask_credential_on_launch: false
-      survey_enabled: false
-      become_enabled: false
-      diff_mode: false
-      allow_simultaneous: false
-      job_slice_count: 1
-      webhook_service: ''
-      webhook_credential:
-      inventory:
-        organization:
-          name: Default
-          type: organization
-        name: AWS Running Inventory
-        type: inventory
-      project:
-        organization:
-          name: Default
-          type: organization
-        name: AWS Platform
-        type: project
-      execution_environment:
-        name: AWS Platform EE
-        type: execution_environment
-      related:
-        labels: []
-        credentials:
-        - organization:
-            name: Default
-            type: organization
-          name: AWS Machine Credential
-          credential_type:
             name: Machine
             kind: ssh
             type: credential_type
@@ -960,7 +937,7 @@ export_content:
         organization:
           name: Default
           type: organization
-        name: Base RHEL Config @ 03:25 PM
+        name: Base RHEL Config
         type: job_template
     - name: Build Bootstrap Definitions
       description: ''
@@ -1023,15 +1000,6 @@ export_content:
         - organization:
             name: Default
             type: organization
-          name: AWS mbredemekey
-          credential_type:
-            name: AWS Key
-            kind: cloud
-            type: credential_type
-          type: credential
-        - organization:
-            name: Default
-            type: organization
           name: AWS Vault
           credential_type:
             name: Vault
@@ -1067,7 +1035,8 @@ export_content:
       limit: ''
       verbosity: 0
       extra_vars: "---\nvm_names: \n  - \"aap_demo_controller\"\nimage_name: \"rhel88\"\nvpc_prefix:
-        \"mbredeme\"\n_instance_type_: \"m5.xlarge\"\nenv: prod"
+        \"mbredeme\"\n_instance_type_: \"m5.xlarge\"\nenv: prod\nsubscription_name:
+        rhel_development_teams\napp_tag: utility\nenv_tag: dev\nname_tag: aap_demo"
       job_tags: ''
       force_handlers: false
       skip_tags: ''
@@ -1213,15 +1182,6 @@ export_content:
       related:
         labels: []
         credentials:
-        - organization:
-            name: Default
-            type: organization
-          name: AWS mbredemekey
-          credential_type:
-            name: AWS Key
-            kind: cloud
-            type: credential_type
-          type: credential
         - organization:
             name: Default
             type: organization
@@ -1528,31 +1488,6 @@ export_content:
         type: execution_environment
     applications: []
     schedules:
-    - rrule: DTSTART:20220811T203756Z RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=SU
-      name: Cleanup Job Schedule
-      description: Automatically Generated Schedule
-      extra_data:
-        days: '120'
-      inventory:
-      scm_branch:
-      job_type:
-      job_tags:
-      skip_tags:
-      limit:
-      diff_mode:
-      verbosity:
-      enabled: true
-      unified_job_template:
-        name: Cleanup Job Details
-        type: system_job_template
-      related:
-        credentials: []
-      natural_key:
-        unified_job_template:
-          name: Cleanup Job Details
-          type: system_job_template
-        name: Cleanup Job Schedule
-        type: schedule
     - rrule: DTSTART:20220811T203756Z RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=TU
       name: Cleanup Activity Schedule
       description: Automatically Generated Schedule
@@ -1577,6 +1512,31 @@ export_content:
           name: Cleanup Activity Stream
           type: system_job_template
         name: Cleanup Activity Schedule
+        type: schedule
+    - rrule: DTSTART:20220811T203756Z RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=SU
+      name: Cleanup Job Schedule
+      description: Automatically Generated Schedule
+      extra_data:
+        days: '120'
+      inventory:
+      scm_branch:
+      job_type:
+      job_tags:
+      skip_tags:
+      limit:
+      diff_mode:
+      verbosity:
+      enabled: true
+      unified_job_template:
+        name: Cleanup Job Details
+        type: system_job_template
+      related:
+        credentials: []
+      natural_key:
+        unified_job_template:
+          name: Cleanup Job Details
+          type: system_job_template
+        name: Cleanup Job Schedule
         type: schedule
     - rrule: DTSTART:20220811T203910Z RRULE:FREQ=WEEKLY;INTERVAL=1;COUNT=1
       name: Cleanup Expired Sessions
