@@ -132,6 +132,28 @@ export_content:
           kind: registry
           type: credential_type
         type: credential
+    - name: Portal Credential
+      description: ''
+      inputs:
+        portal_password: '{{portal_password}}'
+        portal_username: '{{portal_username}}'
+      organization:
+        name: Default
+        type: organization
+      credential_type:
+        name: Portal Credential Type
+        kind: cloud
+        type: credential_type
+      natural_key:
+        organization:
+          name: Default
+          type: organization
+        name: Portal Credential
+        credential_type:
+          name: Portal Credential Type
+          kind: cloud
+          type: credential_type
+        type: credential
 
     projects:
     - name: AWS Platform
