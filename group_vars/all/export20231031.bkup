@@ -867,7 +867,7 @@ export_content:
         subscription_name: rhel_development_teams
         app_tag: utility
         env_tag: dev
-        name_tag: aap_demo
+        name_tag: aap_demo_controller
       job_tags: ''
       force_handlers: false
       skip_tags: ''

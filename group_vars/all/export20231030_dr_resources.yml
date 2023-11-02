@@ -301,7 +301,10 @@ export_content:
       verbosity: 1
       extra_vars: |-
         ---
-        target_hosts: ec2-3-93-187-216.compute-1.amazonaws.com
+        subscription_name: rhel_development_teams
+        app_tag: utility
+        env_tag: dev
+        name_tag: aap_demo_controller
       job_tags: ''
       force_handlers: false
       skip_tags: ''
@@ -344,15 +347,6 @@ export_content:
       related:
         labels: []
         credentials:
-#        - organization:
-#            name: Default
-#            type: organization
-#          name: AWS mbredemekey
-#          credential_type:
-#            name: AWS Key
-#            kind: cloud
-#            type: credential_type
-#          type: credential
         - organization:
             name: Default
             type: organization
@@ -360,6 +354,15 @@ export_content:
           credential_type:
             name: Vault
             kind: vault
+            type: credential_type
+          type: credential
+        - organization:
+            name: Default
+            type: organization
+          name: AWS mbredemekey
+          credential_type:
+            name: Machine
+            kind: ssh
             type: credential_type
           type: credential
 #        schedules: []
@@ -372,102 +375,6 @@ export_content:
           name: Default
           type: organization
         name: Base RHEL Config
-        type: job_template
-    - name: Build Bootstrap Definitions
-      description: ''
-      job_type: run
-      playbook: copy_existing_controller_config.yaml
-      scm_branch: ''
-      forks: 0
-      limit: ''
-      verbosity: 0
-      extra_vars: |-
-        ---
-        web_server: ec2-3-93-187-216.compute-1.amazonaws.com
-        web_server_user: ec2-user
-        vault_controller_username: {{vault_controller_username}}
-        vault_controller_password: {{vault_controller_password}}
-        vault_controller_hostname: {{vault_controller_hostname}}
-        vault_controller_validate_certs: false
-      job_tags: ''
-      force_handlers: false
-      skip_tags: ''
-      start_at_task: ''
-      timeout: 0
-      use_fact_cache: false
-      host_config_key: ''
-      ask_scm_branch_on_launch: false
-      ask_diff_mode_on_launch: false
-      ask_variables_on_launch: false
-      ask_limit_on_launch: false
-      ask_tags_on_launch: false
-      ask_skip_tags_on_launch: false
-      ask_job_type_on_launch: false
-      ask_verbosity_on_launch: false
-      ask_inventory_on_launch: false
-      ask_credential_on_launch: false
-      survey_enabled: false
-      become_enabled: false
-      diff_mode: false
-      allow_simultaneous: false
-      job_slice_count: 1
-      webhook_service: ''
-      webhook_credential:
-      inventory:
-        organization:
-          name: Default
-          type: organization
-        name: AWS Running Inventory
-        type: inventory
-      project:
-        organization:
-          name: Default
-          type: organization
-        name: CasC Project
-        type: project
-      execution_environment:
-        name: CasC EE
-        type: execution_environment
-      related:
-        labels: []
-        credentials:
-#        - organization:
-#            name: Default
-#            type: organization
-#          name: AWS mbredemekey
-#          credential_type:
-#            name: AWS Key
-#            kind: cloud
-#            type: credential_type
-#          type: credential
-        - organization:
-            name: Default
-            type: organization
-          name: AWS Vault
-          credential_type:
-            name: Vault
-            kind: vault
-            type: credential_type
-          type: credential
-        - organization:
-            name: Default
-            type: organization
-          name: Controller Credential
-          credential_type:
-            name: Red Hat Ansible Automation Platform
-            kind: cloud
-            type: credential_type
-          type: credential
-        schedules: []
-        notification_templates_started: []
-        notification_templates_success: []
-        notification_templates_error: []
-        survey_spec: {}
-      natural_key:
-        organization:
-          name: Default
-          type: organization
-        name: Build Bootstrap Definitions
         type: job_template
     - name: Build VPC and Controller Infra
       description: ''
