@@ -247,6 +247,9 @@ export_content:
         filters:
           # All instances with their state as `running`
           instance-state-name: running
+        keyed_groups:
+          - key: tags.Name
+            separator: ''
       enabled_var: ''
       enabled_value: ''
       host_filter: ''
@@ -569,7 +572,283 @@ export_content:
           type: organization
         name: Export Controller Resources
         type: job_template
-##    workflow_job_templates: []
+    - name: Install and Restore AAP
+      description: ''
+      job_type: run
+      playbook: install-aap.yml
+      scm_branch: ''
+      forks: 0
+      limit: ''
+      verbosity: 0
+      extra_vars: |-
+        ---
+        installer_url: https://access.cdn.redhat.com/content/origin/files/sha256/eb/eb4573d15785d441782279ac7404d763e3905e7032f38d8bfa40bc75c68f9ea1/ansible-automation-platform-setup-2.4-2.tar.gz?user=145a9a523e663ed1033cd6d7d781ba2c&_auth_=1698933853_3ceab3231e72a275cb050231312df18d
+        backup_tar_url: 'https://www.dropbox.com/scl/fi/x2ai7dzbtkclowvjoqt6x/ac_backup2023-10-25_version_2.4-1.tar.gz?rlkey=ao33mgq52aaszo6gqtk5wj39r&dl=0'
+        aap_version: 2-4
+        os: rhel_8
+        bundle: not_bundled
+      job_tags: ''
+      force_handlers: false
+      skip_tags: ''
+      start_at_task: ''
+      timeout: 0
+      use_fact_cache: false
+      host_config_key: ''
+      ask_scm_branch_on_launch: false
+      ask_diff_mode_on_launch: false
+      ask_variables_on_launch: false
+      ask_limit_on_launch: false
+      ask_tags_on_launch: false
+      ask_skip_tags_on_launch: false
+      ask_job_type_on_launch: false
+      ask_verbosity_on_launch: false
+      ask_inventory_on_launch: false
+      ask_credential_on_launch: false
+      ask_execution_environment_on_launch: false
+      ask_labels_on_launch: false
+      ask_forks_on_launch: false
+      ask_job_slice_count_on_launch: false
+      ask_timeout_on_launch: false
+      ask_instance_groups_on_launch: false
+      survey_enabled: false
+      become_enabled: true
+      diff_mode: false
+      allow_simultaneous: false
+      job_slice_count: 1
+      webhook_service: ''
+      webhook_credential:
+      prevent_instance_group_fallback: false
+      inventory:
+        organization:
+          name: Default
+          type: organization
+        name: AWS Running Inventory
+        type: inventory
+      project:
+        organization:
+          name: Default
+          type: organization
+        name: AWS Platform
+        type: project
+      execution_environment:
+        name: AWS Platform EE
+        type: execution_environment
+      related:
+        labels: []
+        credentials:
+        - organization:
+            name: Default
+            type: organization
+          name: AWS mbredemekey
+          credential_type:
+            name: Machine
+            kind: ssh
+            type: credential_type
+          type: credential
+        - organization:
+            name: Default
+            type: organization
+          name: AWS Vault
+          credential_type:
+            name: Vault
+            kind: vault
+            type: credential_type
+          type: credential
+        schedules: []
+        notification_templates_started: []
+        notification_templates_success: []
+        notification_templates_error: []
+        survey_spec: {}
+      natural_key:
+        organization:
+          name: Default
+          type: organization
+        name: Install and Restore A
+
+    workflow_job_templates:
+    - name: DR Build Configure Restore AAP from backup
+      description: ''
+      extra_vars: "---\nvm_names: \n  - \"aap_demo_controller\"\nimage_name: \"rhel88\"\nvpc_prefix:
+        \"mbredeme\"\n_instance_type_: \"m5.xlarge\"\nenv: prod\nsubscription_name:
+        rhel_development_teams\napp_tag: utility\nenv_tag: dev\nname_tag: aap_demo_controller"
+      survey_enabled: false
+      allow_simultaneous: false
+      ask_variables_on_launch: false
+      inventory:
+      limit:
+      scm_branch:
+      ask_inventory_on_launch: false
+      ask_scm_branch_on_launch: false
+      ask_limit_on_launch: false
+      webhook_service: ''
+      webhook_credential:
+      ask_labels_on_launch: false
+      ask_skip_tags_on_launch: false
+      ask_tags_on_launch: false
+      skip_tags:
+      job_tags:
+      organization:
+        name: Default
+        type: organization
+      related:
+        schedules: []
+        workflow_nodes:
+        - extra_data: {}
+          inventory:
+          scm_branch:
+          job_type:
+          job_tags:
+          skip_tags:
+          limit:
+          diff_mode:
+          verbosity:
+          execution_environment:
+          forks:
+          job_slice_count:
+          timeout:
+          all_parents_must_converge: false
+          identifier: bba8b2f2-15d5-4a77-9f45-85b63ea140c0
+          workflow_job_template:
+            organization:
+              name: Default
+              type: organization
+            name: DR Build Configure Restore AAP from backup
+            type: workflow_job_template
+          unified_job_template:
+            name: AWS Running Inventory Source
+            inventory:
+              organization:
+                name: Default
+                type: organization
+              name: AWS Running Inventory
+              type: inventory
+            type: inventory_source
+          related:
+            credentials: []
+            success_nodes:
+            - workflow_job_template:
+                organization:
+                  name: Default
+                  type: organization
+                name: DR Build Configure Restore AAP from backup
+                type: workflow_job_template
+              identifier: 01404001-7e6e-4846-9277-423bd8fd5f19
+              type: workflow_job_template_node
+            failure_nodes: []
+            always_nodes: []
+          natural_key:
+            workflow_job_template:
+              organization:
+                name: Default
+                type: organization
+              name: DR Build Configure Restore AAP from backup
+              type: workflow_job_template
+            identifier: bba8b2f2-15d5-4a77-9f45-85b63ea140c0
+            type: workflow_job_template_node
+        - extra_data: {}
+          inventory:
+          scm_branch:
+          job_type:
+          job_tags:
+          skip_tags:
+          limit:
+          diff_mode:
+          verbosity:
+          execution_environment:
+          forks:
+          job_slice_count:
+          timeout:
+          all_parents_must_converge: false
+          identifier: a65e828f-2d7b-41f3-874c-aec8d0df2b29
+          workflow_job_template:
+            organization:
+              name: Default
+              type: organization
+            name: DR Build Configure Restore AAP from backup
+            type: workflow_job_template
+          unified_job_template:
+            organization:
+              name: Default
+              type: organization
+            name: Build VPC and Controller Infra
+            type: job_template
+          related:
+            credentials: []
+            success_nodes:
+            - workflow_job_template:
+                organization:
+                  name: Default
+                  type: organization
+                name: DR Build Configure Restore AAP from backup
+                type: workflow_job_template
+              identifier: bba8b2f2-15d5-4a77-9f45-85b63ea140c0
+              type: workflow_job_template_node
+            failure_nodes: []
+            always_nodes: []
+          natural_key:
+            workflow_job_template:
+              organization:
+                name: Default
+                type: organization
+              name: DR Build Configure Restore AAP from backup
+              type: workflow_job_template
+            identifier: a65e828f-2d7b-41f3-874c-aec8d0df2b29
+            type: workflow_job_template_node
+        - extra_data:
+            target_hosts: ec2-3-93-187-216.compute-1.amazonaws.com
+          inventory:
+          scm_branch:
+          job_type:
+          job_tags:
+          skip_tags:
+          limit:
+          diff_mode:
+          verbosity:
+          execution_environment:
+          forks:
+          job_slice_count:
+          timeout:
+          all_parents_must_converge: false
+          identifier: 01404001-7e6e-4846-9277-423bd8fd5f19
+          workflow_job_template:
+            organization:
+              name: Default
+              type: organization
+            name: DR Build Configure Restore AAP from backup
+            type: workflow_job_template
+          unified_job_template:
+            organization:
+              name: Default
+              type: organization
+            name: Base RHEL Config
+            type: job_template
+          related:
+            credentials: []
+            success_nodes: []
+            failure_nodes: []
+            always_nodes: []
+          natural_key:
+            workflow_job_template:
+              organization:
+                name: Default
+                type: organization
+              name: DR Build Configure Restore AAP from backup
+              type: workflow_job_template
+            identifier: 01404001-7e6e-4846-9277-423bd8fd5f19
+            type: workflow_job_template_node
+        labels: []
+        notification_templates_started: []
+        notification_templates_success: []
+        notification_templates_error: []
+        notification_templates_approvals: []
+        survey_spec: {}
+      natural_key:
+        organization:
+          name: Default
+          type: organization
+        name: DR Build Configure Restore AAP from backup
+        type: workflow_job_template
+
     execution_environments:
     - name: CasC EE
       description: ''
