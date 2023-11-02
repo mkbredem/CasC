@@ -1568,8 +1568,8 @@ export_content:
         vault_controller_password: ********
         vault_controller_hostname: ansible-1.6g5nl.sandbox1540.opentlc.com
         vault_controller_validate_certs: false
-        AWS_ACCESS_KEY_ID: AKIAV2DUTATUCNMZI3OE
-        AWS_SECRET_ACCESS_KEY: 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
+        AWS_ACCESS_KEY_ID: 
+        AWS_SECRET_ACCESS_KEY: 
       job_tags: ''
       force_handlers: false
       skip_tags: ''
