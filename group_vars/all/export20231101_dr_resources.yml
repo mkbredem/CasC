@@ -362,7 +362,7 @@ export_content:
         - organization:
             name: Default
             type: organization
-          name: AWS mbredemekey
+          name: AWS {{vpc_prefix}}key
           credential_type:
             name: Machine
             kind: ssh
@@ -387,8 +387,7 @@ export_content:
       forks: 0
       limit: ''
       verbosity: 0
-      extra_vars: "---\nvm_names: \n  - \"aap_demo_controller\"\nimage_name: \"rhel88\"\nvpc_prefix:
-        \"mbredeme\"\n_instance_type_: \"m5.xlarge\"\nenv: prod"
+      extra_vars: "---"
       job_tags: ''
       force_handlers: false
       skip_tags: ''
@@ -639,7 +638,7 @@ export_content:
         - organization:
             name: Default
             type: organization
-          name: AWS mbredemekey
+          name: AWS {{vpc_prefix}}key
           credential_type:
             name: Machine
             kind: ssh
@@ -669,7 +668,7 @@ export_content:
     - name: DR Build Configure Restore AAP from backup
       description: ''
       extra_vars: "---\nvm_names: \n  - \"aap_demo_controller\"\nimage_name: \"rhel88\"\nvpc_prefix:
-        \"mbredeme\"\n_instance_type_: \"m5.xlarge\"\nenv: prod\nsubscription_name:
+        \"{{vpc_prefix}}\"\n_instance_type_: \"m5.xlarge\"\nenv: prod\nsubscription_name:
         rhel_development_teams\napp_tag: utility\nenv_tag: dev\nname_tag: aap_demo_controller"
       survey_enabled: false
       allow_simultaneous: false
