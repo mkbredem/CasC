@@ -657,100 +657,100 @@ export_content:
           type: organization
         name: DR_Build_5_Restore AAP postgres
         type: job_template
-#    - name: DR_Misc_Export Controller Resources
-#      description: ''
-#      job_type: run
-#      playbook: test_export.yml
-#      scm_branch: ''
-#      forks: 0
-#      limit: ''
-#      verbosity: 0
-#      extra_vars: |-
-#        ---
-#        web_server: ec2-3-93-187-216.compute-1.amazonaws.com
-#        web_server_user: ec2-user
-#        vault_controller_username: {{vault_controller_username}}
-#        vault_controller_password: {{vault_controller_password}}
-#        vault_controller_hostname: {{vault_controller_hostname}}
-#        vault_controller_validate_certs: false
-#      job_tags: ''
-#      force_handlers: false
-#      skip_tags: ''
-#      start_at_task: ''
-#      timeout: 0
-#      use_fact_cache: false
-#      host_config_key: ''
-#      ask_scm_branch_on_launch: false
-#      ask_diff_mode_on_launch: false
-#      ask_variables_on_launch: false
-#      ask_limit_on_launch: false
-#      ask_tags_on_launch: false
-#      ask_skip_tags_on_launch: false
-#      ask_job_type_on_launch: false
-#      ask_verbosity_on_launch: false
-#      ask_inventory_on_launch: false
-#      ask_credential_on_launch: false
-#      ask_execution_environment_on_launch: false
-#      ask_labels_on_launch: false
-#      ask_forks_on_launch: false
-#      ask_job_slice_count_on_launch: false
-#      ask_timeout_on_launch: false
-#      ask_instance_groups_on_launch: false
-#      survey_enabled: false
-#      become_enabled: false
-#      diff_mode: false
-#      allow_simultaneous: false
-#      job_slice_count: 1
-#      webhook_service: ''
-#      webhook_credential:
-#      prevent_instance_group_fallback: false
-#      inventory:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: AWS Running Inventory
-#        type: inventory
-#      project:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: DR CasC Bootstrap
-#        type: project
-#      execution_environment:
-#        name: AWS Platform EE
-#        type: execution_environment
-#      related:
-#        labels: []
-#        credentials:
-#        - organization:
-#            name: Default
-#            type: organization
-#          name: Vault Credential
-#          credential_type:
-#            name: Vault
-#            kind: vault
-#            type: credential_type
-#          type: credential
-#        - organization:
-#            name: Default
-#            type: organization
-#          name: Controller Credential
-#          credential_type:
-#            name: Red Hat Ansible Automation Platform
-#            kind: cloud
-#            type: credential_type
-#          type: credential
-#        schedules: []
-#        notification_templates_started: []
-#        notification_templates_success: []
-#        notification_templates_error: []
-#        survey_spec: {}
-#      natural_key:
-#        organization:
-#          name: Default
-#          type: organization
-#        name: DR_Misc_Export Controller Resources
-#        type: job_template
+    - name: DR_Misc_Export Controller Resources
+      description: ''
+      job_type: run
+      playbook: test_export.yml
+      scm_branch: ''
+      forks: 0
+      limit: ''
+      verbosity: 0
+      extra_vars: |-
+        ---
+        web_server: ec2-3-93-187-216.compute-1.amazonaws.com
+        web_server_user: ec2-user
+        vault_controller_username: {{vault_controller_username}}
+        vault_controller_password: {{vault_controller_password}}
+        vault_controller_hostname: {{vault_controller_hostname}}
+        vault_controller_validate_certs: false
+      job_tags: ''
+      force_handlers: false
+      skip_tags: ''
+      start_at_task: ''
+      timeout: 0
+      use_fact_cache: false
+      host_config_key: ''
+      ask_scm_branch_on_launch: false
+      ask_diff_mode_on_launch: false
+      ask_variables_on_launch: false
+      ask_limit_on_launch: false
+      ask_tags_on_launch: false
+      ask_skip_tags_on_launch: false
+      ask_job_type_on_launch: false
+      ask_verbosity_on_launch: false
+      ask_inventory_on_launch: false
+      ask_credential_on_launch: false
+      ask_execution_environment_on_launch: false
+      ask_labels_on_launch: false
+      ask_forks_on_launch: false
+      ask_job_slice_count_on_launch: false
+      ask_timeout_on_launch: false
+      ask_instance_groups_on_launch: false
+      survey_enabled: false
+      become_enabled: false
+      diff_mode: false
+      allow_simultaneous: false
+      job_slice_count: 1
+      webhook_service: ''
+      webhook_credential:
+      prevent_instance_group_fallback: false
+      inventory:
+        organization:
+          name: Default
+          type: organization
+        name: AWS Running Inventory
+        type: inventory
+      project:
+        organization:
+          name: Default
+          type: organization
+        name: DR CasC Bootstrap
+        type: project
+      execution_environment:
+        name: AWS Platform EE
+        type: execution_environment
+      related:
+        labels: []
+        credentials:
+        - organization:
+            name: Default
+            type: organization
+          name: Vault Credential
+          credential_type:
+            name: Vault
+            kind: vault
+            type: credential_type
+          type: credential
+        - organization:
+            name: Default
+            type: organization
+          name: Controller Credential
+          credential_type:
+            name: Red Hat Ansible Automation Platform
+            kind: cloud
+            type: credential_type
+          type: credential
+        schedules: []
+        notification_templates_started: []
+        notification_templates_success: []
+        notification_templates_error: []
+        survey_spec: {}
+      natural_key:
+        organization:
+          name: Default
+          type: organization
+        name: DR_Misc_Export Controller Resources
+        type: job_template
 
     workflow_job_templates:
     - name: DR_Build_6_Configure Restore AAP from backup WFJT
