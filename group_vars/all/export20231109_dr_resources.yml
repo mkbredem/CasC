@@ -13,33 +13,33 @@ export_content:
         type: organization
 
     credential_types:
-    - name: AWS Key
-      description: ''
-      kind: cloud
-      inputs:
-        fields:
-        - id: awsusername
-          type: string
-          label: Username
-        - id: aws_ssh_key
-          type: string
-          label: SSH Private Key
-          format: ssh_private_key
-          secret: true
-          multiline: true
-        required:
-        - awsusername
-        - aws_ssh_key
-      injectors:
-        file:
-          template: '{{ "{{aws_ssh_key}}" }}'
-        extra_vars:
-          aws_key_file: '{{ "{{tower.filename}}" }}'
-          aws_username: '{{ "{{awsusername}}" }}'
-      natural_key:
-        name: AWS Key
-        kind: cloud
-        type: credential_type
+#    - name: AWS Key
+#      description: ''
+#      kind: cloud
+#      inputs:
+#        fields:
+#        - id: awsusername
+#          type: string
+#          label: Username
+#        - id: aws_ssh_key
+#          type: string
+#          label: SSH Private Key
+#          format: ssh_private_key
+#          secret: true
+#          multiline: true
+#        required:
+#        - awsusername
+#        - aws_ssh_key
+#      injectors:
+#        file:
+#          template: '{{ "{{aws_ssh_key}}" }}'
+#        extra_vars:
+#          aws_key_file: '{{ "{{tower.filename}}" }}'
+#          aws_username: '{{ "{{awsusername}}" }}'
+#      natural_key:
+#        name: AWS Key
+#        kind: cloud
+#        type: credential_type
     - name: Portal Credential Type
       description: ''
       kind: cloud
