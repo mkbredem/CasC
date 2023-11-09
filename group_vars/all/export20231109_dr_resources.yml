@@ -100,51 +100,28 @@ export_content:
           kind: cloud
           type: credential_type
         type: credential
-    - name: AWS Vault
-      description: ''
-      inputs:
-        vault_id: ''
-        vault_password: "{{dr_vault_password}}"
-      organization:
-        name: Default
-        type: organization
-      credential_type:
-        name: Vault
-        kind: vault
-        type: credential_type
-      natural_key:
-        organization:
-          name: Default
-          type: organization
-        name: AWS Vault
-        credential_type:
-          name: Vault
-          kind: vault
-          type: credential_type
-        type: credential
-    - name: Quay mbredeme
-      description: ''
-      organization:
-      inputs:
-        host: quay.io
-        password: "{{quay_password}}"
-        username: mbredeme
-        verify_ssl: true
-      credential_type:
-        name: Container Registry
-        kind: registry
-        type: credential_type
-      user:
-        username: admin
-        type: user
-      natural_key:
-        organization:
-        name: Quay mbredeme
-        credential_type:
-          name: Container Registry
-          kind: registry
-          type: credential_type
-        type: credential
+#    - name: AWS Vault
+#      description: ''
+#      inputs:
+#        vault_id: ''
+#        vault_password: "{{dr_vault_password}}"
+#      organization:
+#        name: Default
+#        type: organization
+#      credential_type:
+#        name: Vault
+#        kind: vault
+#        type: credential_type
+#      natural_key:
+#        organization:
+#          name: Default
+#          type: organization
+#        name: AWS Vault
+#        credential_type:
+#          name: Vault
+#          kind: vault
+#          type: credential_type
+#        type: credential
     - name: Portal Credential
       description: ''
       inputs:
@@ -219,37 +196,6 @@ export_content:
           name: Default
           type: organization
         name: AWS Platform
-        type: project
-    - name: DR CasC Bootstrap
-      description: ''
-      local_path: _13__casc_project
-      scm_type: git
-      scm_url: https://github.com/mkbredem/CasC.git
-      scm_branch: ''
-      scm_refspec: ''
-      scm_clean: false
-      scm_track_submodules: false
-      scm_delete_on_update: false
-      credential:
-      timeout: 0
-      scm_update_on_launch: true
-      scm_update_cache_timeout: 0
-      allow_override: false
-      organization:
-        name: Default
-        type: organization
-      default_environment:
-        name: configascode workshop execution environment
-        type: execution_environment
-      related:
-        notification_templates_started: []
-        notification_templates_success: []
-        notification_templates_error: []
-      natural_key:
-        organization:
-          name: Default
-          type: organization
-        name: DR CasC Bootstrap
         type: project
 
     inventory:
@@ -398,7 +344,7 @@ export_content:
         - organization:
             name: Default
             type: organization
-          name: AWS Vault
+          name: Vault Credential
           credential_type:
             name: Vault
             kind: vault
@@ -499,7 +445,7 @@ export_content:
         - organization:
             name: Default
             type: organization
-          name: AWS Vault
+          name: Vault Credential
           credential_type:
             name: Vault
             kind: vault
@@ -605,7 +551,7 @@ export_content:
         - organization:
             name: Default
             type: organization
-          name: AWS Vault
+          name: Vault Credential
           credential_type:
             name: Vault
             kind: vault
@@ -694,7 +640,7 @@ export_content:
         - organization:
             name: Default
             type: organization
-          name: AWS Vault
+          name: Vault Credential
           credential_type:
             name: Vault
             kind: vault
@@ -779,7 +725,7 @@ export_content:
         - organization:
             name: Default
             type: organization
-          name: AWS Vault
+          name: Vault Credential
           credential_type:
             name: Vault
             kind: vault
