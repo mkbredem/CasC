@@ -78,7 +78,6 @@ export_content:
         kind: cloud
         type: credential_type
 
-
     credentials:
     - name: AWS Credential
       description: ''
@@ -509,6 +508,12 @@ export_content:
         - organization:
             name: Default
             type: organization
+          name: Portal Credential
+          credential_type:
+            name: Portal Credential Type
+            kind: cloud
+            type: credential_type
+          type: credential
 #        schedules: []
 #        notification_templates_started: []
 #        notification_templates_success: []
