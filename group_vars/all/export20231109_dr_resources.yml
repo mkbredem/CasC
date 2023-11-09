@@ -3,14 +3,14 @@ export_content:
   changed: false
   assets:
 
-#    organizations:
-#    - name: Default
-#      description: ''
-#      max_hosts: 0
-#      default_environment:
-#      natural_key:
-#        name: Default
-#        type: organization
+    organizations:
+    - name: Default
+      description: ''
+      max_hosts: 0
+      default_environment:
+      natural_key:
+        name: Default
+        type: organization
 
     credential_types:
     - name: AWS Key
