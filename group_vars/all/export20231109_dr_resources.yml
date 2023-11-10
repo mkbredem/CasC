@@ -234,7 +234,7 @@ export_content:
       enabled_var: ''
       enabled_value: ''
       host_filter: ''
-      overwrite: false
+      overwrite: true
       overwrite_vars: false
       timeout: 0
       verbosity: 1
