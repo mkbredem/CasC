@@ -284,7 +284,7 @@ export_content:
       limit: ''
       verbosity: 0
       extra_vars: "---\nvm_names: \n  - \"aap_demo_controller\"\nimage_name: \"rhel88\"\nvpc_prefix:
-        \"mbredeme\"\n_instance_type_: \"m5.xlarge\"\nenv: prod"
+        \"mbredeme\"\n_instance_type_: \"m5.xlarge\"\nenv: prod\nstorage: 50"
       job_tags: ''
       force_handlers: false
       skip_tags: ''
@@ -760,7 +760,7 @@ export_content:
         rhel_development_teams\napp_tag: utility\nenv_tag: dev\nname_tag: aap_demo_controller\ninstaller_url:
         #from dropbox or cdn\nbackup_tar_url: #from dropbox\naccess_token: #from dropbox\nbackup_file_name:
         ac_backup2023-10-25_version_2.4-1.tar.gz #as it appears in dropbox\naap_version:
-        \"2.4\"\nos: rhel-8\nbundle: not_bundled"
+        \"2.4\"\nos: rhel-8\nbundle: not_bundled\nstorage: 50"
       survey_enabled: false
       allow_simultaneous: false
       ask_variables_on_launch: true
