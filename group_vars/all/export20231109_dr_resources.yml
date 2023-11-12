@@ -320,7 +320,7 @@ export_content:
         organization:
           name: Default
           type: organization
-        name: Workshop Inventory
+        name: AWS Running Inventory
         type: inventory
       project:
         organization:
