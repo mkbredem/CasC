@@ -1,0 +1,14 @@
+all:
+  children:
+    automationcontroller:
+      hosts:
+        control:
+          ansible_host: controller.mkbredem.com
+    automationhub:
+      hosts:
+        hub:
+          ansible_host: hub.mkbredem.com
+    builder:
+      hosts:
+        control:
+          ansible_host:
