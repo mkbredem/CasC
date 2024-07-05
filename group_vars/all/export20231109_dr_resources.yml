@@ -344,7 +344,7 @@ export_content:
         - organization:
             name: mbredeme - Default
             type: organization
-          name: Vault Credential
+          name: mbredeme - vault
           credential_type:
             name: Vault
             kind: vault
@@ -445,7 +445,7 @@ export_content:
         - organization:
             name: mbredeme - Default
             type: organization
-          name: Vault Credential
+          name: mbredeme - vault
           credential_type:
             name: Vault
             kind: vault
@@ -551,7 +551,7 @@ export_content:
         - organization:
             name: mbredeme - Default
             type: organization
-          name: Vault Credential
+          name: mbredeme - vault
           credential_type:
             name: Vault
             kind: vault
@@ -640,7 +640,7 @@ export_content:
         - organization:
             name: mbredeme - Default
             type: organization
-          name: Vault Credential
+          name: mbredeme - vault
           credential_type:
             name: Vault
             kind: vault
@@ -725,7 +725,7 @@ export_content:
 #        - organization:
 #            name: mbredeme - Default
 #            type: organization
-#          name: Vault Credential
+#          name: mbredeme - vault
 #          credential_type:
 #            name: Vault
 #            kind: vault
