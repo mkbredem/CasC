@@ -2,7 +2,6 @@
 export_content:
   changed: false
   assets:
-
     organizations:
     - name: mbredeme - Default
       description: ''
@@ -138,7 +137,7 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: Portal Credential
+        name: mbredeme - Portal Credential
         credential_type:
           name: mbredeme - Portal Credential Type
           kind: cloud
@@ -335,7 +334,7 @@ export_content:
         labels: []
         credentials:
         - organization:
-          name: mbredeme - AWS Credential
+          name: mbredeme - Default
           credential_type:
             name: Amazon Web Services
             kind: cloud
@@ -350,15 +349,15 @@ export_content:
             kind: vault
             type: credential_type
           type: credential
-        - organization:
-            name: mbredeme - Default
-            type: organization
-          name: Controller Credential
-          credential_type:
-            name: Red Hat Ansible Automation Platform
-            kind: cloud
-            type: credential_type
-          type: credential
+        #- organization:
+        #    name: mbredeme - Default
+        #    type: organization
+        #  name: Controller Credential
+        #  credential_type:
+        #    name: Red Hat Ansible Automation Platform
+        #    kind: cloud
+        #    type: credential_type
+        #  type: credential
         schedules: []
         notification_templates_started: []
         notification_templates_success: []
@@ -368,7 +367,7 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: DR_Build_2_Build VPC and Controller Infra
+        name: mbredeme - DR_Build_2_Build VPC and Controller Infra
         type: job_template
     - name: mbredeme - DR_Build_3_Base RHEL Config
       description: ''
@@ -454,7 +453,7 @@ export_content:
         - organization:
             name: mbredeme - Default
             type: organization
-          name: Portal Credential
+          name: mbredeme - Portal Credential
           credential_type:
             name: mbredeme - Portal Credential Type
             kind: cloud
@@ -469,7 +468,7 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: DR_Build_3_Base RHEL Config
+        name: mbredeme - DR_Build_3_Base RHEL Config
         type: job_template
     - name: mbredeme - DR_Build_4_Install AAP
       description: ''
@@ -566,7 +565,7 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: DR_Build_4_Install AAP
+        name: mbredeme - DR_Build_4_Install AAP
         type: job_template
     - name: mbredeme - DR_Build_5_Restore AAP postgres
       description: ''
@@ -655,7 +654,7 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: DR_Build_5_Restore AAP postgres
+        name: mbredeme - DR_Build_5_Restore AAP postgres
         type: job_template
 #    - name: DR_Misc_Export Controller Resources
 #      description: ''
@@ -802,7 +801,7 @@ export_content:
             organization:
               name: mbredeme - Default
               type: organization
-            name: DR_Build_6_Configure Restore AAP from backup WFJT
+            name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
             type: workflow_job_template
           unified_job_template:
             name: mbredeme - AWS Running Inventory Source
@@ -820,7 +819,7 @@ export_content:
                 organization:
                   name: mbredeme - Default
                   type: organization
-                name: DR_Build_6_Configure Restore AAP from backup WFJT
+                name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
                 type: workflow_job_template
               identifier: 01404001-7e6e-4846-9277-423bd8fd5f19
               type: workflow_job_template_node
@@ -831,7 +830,7 @@ export_content:
               organization:
                 name: mbredeme - Default
                 type: organization
-              name: DR_Build_6_Configure Restore AAP from backup WFJT
+              name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
               type: workflow_job_template
             identifier: bba8b2f2-15d5-4a77-9f45-85b63ea140c0
             type: workflow_job_template_node
@@ -854,13 +853,13 @@ export_content:
             organization:
               name: mbredeme - Default
               type: organization
-            name: DR_Build_6_Configure Restore AAP from backup WFJT
+            name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
             type: workflow_job_template
           unified_job_template:
             organization:
               name: mbredeme - Default
               type: organization
-            name: DR_Build_2_Build VPC and Controller Infra
+            name: mbredeme - DR_Build_2_Build VPC and Controller Infra
             type: job_template
           related:
             credentials: []
@@ -869,7 +868,7 @@ export_content:
                 organization:
                   name: mbredeme - Default
                   type: organization
-                name: DR_Build_6_Configure Restore AAP from backup WFJT
+                name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
                 type: workflow_job_template
               identifier: bba8b2f2-15d5-4a77-9f45-85b63ea140c0
               type: workflow_job_template_node
@@ -880,7 +879,7 @@ export_content:
               organization:
                 name: mbredeme - Default
                 type: organization
-              name: DR_Build_6_Configure Restore AAP from backup WFJT
+              name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
               type: workflow_job_template
             identifier: a65e828f-2d7b-41f3-874c-aec8d0df2b29
             type: workflow_job_template_node
@@ -904,13 +903,13 @@ export_content:
             organization:
               name: mbredeme - Default
               type: organization
-            name: DR_Build_6_Configure Restore AAP from backup WFJT
+            name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
             type: workflow_job_template
           unified_job_template:
             organization:
               name: mbredeme - Default
               type: organization
-            name: DR_Build_3_Base RHEL Config
+            name: mbredeme - DR_Build_3_Base RHEL Config
             type: job_template
           related:
             credentials: []
@@ -919,7 +918,7 @@ export_content:
                 organization:
                   name: mbredeme - Default
                   type: organization
-                name: DR_Build_6_Configure Restore AAP from backup WFJT
+                name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
                 type: workflow_job_template
               identifier: 86c39bda-6313-49d0-a0ce-bfb90b79d9ed
               type: workflow_job_template_node
@@ -930,7 +929,7 @@ export_content:
               organization:
                 name: mbredeme - Default
                 type: organization
-              name: DR_Build_6_Configure Restore AAP from backup WFJT
+              name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
               type: workflow_job_template
             identifier: 01404001-7e6e-4846-9277-423bd8fd5f19
             type: workflow_job_template_node
@@ -953,13 +952,13 @@ export_content:
             organization:
               name: mbredeme - Default
               type: organization
-            name: DR_Build_6_Configure Restore AAP from backup WFJT
+            name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
             type: workflow_job_template
           unified_job_template:
             organization:
               name: mbredeme - Default
               type: organization
-            name: DR_Build_4_Install AAP
+            name: mbredeme - DR_Build_4_Install AAP
             type: job_template
           related:
             credentials: []
@@ -968,7 +967,7 @@ export_content:
                 organization:
                   name: mbredeme - Default
                   type: organization
-                name: DR_Build_6_Configure Restore AAP from backup WFJT
+                name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
                 type: workflow_job_template
               identifier: 531fc55d-7612-4a1c-ab16-957ca0a88259
               type: workflow_job_template_node
@@ -979,7 +978,7 @@ export_content:
               organization:
                 name: mbredeme - Default
                 type: organization
-              name: DR_Build_6_Configure Restore AAP from backup WFJT
+              name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
               type: workflow_job_template
             identifier: 86c39bda-6313-49d0-a0ce-bfb90b79d9ed
             type: workflow_job_template_node
@@ -1002,13 +1001,13 @@ export_content:
             organization:
               name: mbredeme - Default
               type: organization
-            name: DR_Build_6_Configure Restore AAP from backup WFJT
+            name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
             type: workflow_job_template
           unified_job_template:
             organization:
               name: mbredeme - Default
               type: organization
-            name: DR_Build_5_Restore AAP postgres
+            name: mbredeme - DR_Build_5_Restore AAP postgres
             type: job_template
           related:
             credentials: []
@@ -1020,7 +1019,7 @@ export_content:
               organization:
                 name: mbredeme - Default
                 type: organization
-              name: DR_Build_6_Configure Restore AAP from backup WFJT
+              name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
               type: workflow_job_template
             identifier: 531fc55d-7612-4a1c-ab16-957ca0a88259
             type: workflow_job_template_node
@@ -1034,7 +1033,7 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: DR_Build_6_Configure Restore AAP from backup WFJT
+        name: mbredeme - DR_Build_6_Configure Restore AAP from backup WFJT
         type: workflow_job_template
 
     execution_environments:
