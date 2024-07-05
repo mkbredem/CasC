@@ -12,4 +12,6 @@
     - name: Import all assets from our export
       ansible.controller.import:
         assets: "{{ export_content.assets }}"
-        controller_host: "{{ vault_controller_hostname }}"
+        controller_host: "{{ controller_hostname }}"
+        controller_username: "{{ controller_username }}"
+        controller_password: "{{ controller_password }}"
