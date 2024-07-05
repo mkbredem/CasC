@@ -242,7 +242,7 @@ export_content:
       source_project:
       update_on_project_update: false
       credential:
-        organization:
+        organization: mbredeme - Default
         name: mbredeme - AWS Credential
         credential_type:
           name: Amazon Web Services
@@ -334,7 +334,9 @@ export_content:
         labels: []
         credentials:
         - organization:
-          name: mbredeme - Default
+            name: mbredeme - Default
+            type: organization
+          name: mbredeme - AWS Credential
           credential_type:
             name: Amazon Web Services
             kind: cloud
