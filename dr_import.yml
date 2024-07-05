@@ -7,7 +7,7 @@
   tasks:
     - name: Show import assets
       debug: 
-        var: {{ export_content.assets }}
+        var: "{{ export_content.assets }}"
 
     - name: Import all assets from our export
       ansible.controller.import:
