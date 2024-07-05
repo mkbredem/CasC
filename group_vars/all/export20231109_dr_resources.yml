@@ -131,7 +131,7 @@ export_content:
         name: mbredeme - Default
         type: organization
       credential_type:
-        name: Portal Credential Type
+        name: mbredeme - Portal Credential Type
         kind: cloud
         type: credential_type
       natural_key:
@@ -140,7 +140,7 @@ export_content:
           type: organization
         name: Portal Credential
         credential_type:
-          name: Portal Credential Type
+          name: mbredeme - Portal Credential Type
           kind: cloud
           type: credential_type
         type: credential
@@ -456,7 +456,7 @@ export_content:
             type: organization
           name: Portal Credential
           credential_type:
-            name: Portal Credential Type
+            name: mbredeme - Portal Credential Type
             kind: cloud
             type: credential_type
           type: credential
