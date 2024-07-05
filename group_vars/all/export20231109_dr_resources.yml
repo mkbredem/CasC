@@ -27,7 +27,7 @@ export_content:
         type: organization
 
     credential_types:
-#    - name: AWS Key
+#    - name: mbredeme - AWS Key
 #      description: ''
 #      kind: cloud
 #      inputs:
@@ -51,7 +51,7 @@ export_content:
 #          aws_key_file: '{{ "{{tower.filename}}" }}'
 #          aws_username: '{{ "{{awsusername}}" }}'
 #      natural_key:
-#        name: AWS Key
+#        name: mbredeme - AWS Key
 #        kind: cloud
 #        type: credential_type
     - name: mbredeme - Portal Credential Type
@@ -94,13 +94,13 @@ export_content:
         type: user
       natural_key:
         organization:
-        name: AWS Credential
+        name: mbredeme - AWS Credential
         credential_type:
           name: Amazon Web Services
           kind: cloud
           type: credential_type
         type: credential
-#    - name: AWS Vault
+#    - name: mbredeme - AWS Vault
 #      description: ''
 #      inputs:
 #        vault_id: ''
@@ -116,7 +116,7 @@ export_content:
 #        organization:
 #          name: mbredeme - Default
 #          type: organization
-#        name: AWS Vault
+#        name: mbredeme - AWS Vault
 #        credential_type:
 #          name: Vault
 #          kind: vault
@@ -195,7 +195,7 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: AWS Platform
+        name: mbredeme - AWS Platform
         type: project
 
     inventory:
@@ -212,7 +212,7 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: AWS Running Inventory
+        name: mbredeme - AWS Running Inventory
         type: inventory
 
     inventory_sources:
@@ -244,20 +244,20 @@ export_content:
       update_on_project_update: false
       credential:
         organization:
-        name: AWS Credential
+        name: mbredeme - AWS Credential
         credential_type:
           name: Amazon Web Services
           kind: cloud
           type: credential_type
         type: credential
       execution_environment:
-        name: AWS Platform EE
+        name: mbredeme - AWS Platform EE
         type: execution_environment
       inventory:
         organization:
           name: mbredeme - Default
           type: organization
-        name: AWS Running Inventory
+        name: mbredeme - AWS Running Inventory
         type: inventory
 #      related:
 #        schedules: []
@@ -265,12 +265,12 @@ export_content:
 #        notification_templates_success: []
 #        notification_templates_error: []
       natural_key:
-        name: AWS Running Inventory Source
+        name: mbredeme - AWS Running Inventory Source
         inventory:
           organization:
             name: mbredeme - Default
             type: organization
-          name: AWS Running Inventory
+          name: mbredeme - AWS Running Inventory
           type: inventory
         type: inventory_source
 
@@ -320,22 +320,22 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: AWS Running Inventory
+        name: mbredeme - AWS Running Inventory
         type: inventory
       project:
         organization:
           name: mbredeme - Default
           type: organization
-        name: AWS Platform
+        name: mbredeme - AWS Platform
         type: project
       execution_environment:
-        name: AWS Platform EE
+        name: mbredeme - AWS Platform EE
         type: execution_environment
       related:
         labels: []
         credentials:
         - organization:
-          name: AWS Credential
+          name: mbredeme - AWS Credential
           credential_type:
             name: Amazon Web Services
             kind: cloud
@@ -419,16 +419,16 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: AWS Running Inventory
+        name: mbredeme - AWS Running Inventory
         type: inventory
       project:
         organization:
           name: mbredeme - Default
           type: organization
-        name: AWS Platform
+        name: mbredeme - AWS Platform
         type: project
       execution_environment:
-        name: AWS Platform EE
+        name: mbredeme - AWS Platform EE
         type: execution_environment
       related:
         labels: []
@@ -525,16 +525,16 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: AWS Running Inventory
+        name: mbredeme - AWS Running Inventory
         type: inventory
       project:
         organization:
           name: mbredeme - Default
           type: organization
-        name: AWS Platform
+        name: mbredeme - AWS Platform
         type: project
       execution_environment:
-        name: AWS Platform EE
+        name: mbredeme - AWS Platform EE
         type: execution_environment
       related:
         labels: []
@@ -614,16 +614,16 @@ export_content:
         organization:
           name: mbredeme - Default
           type: organization
-        name: AWS Running Inventory
+        name: mbredeme - AWS Running Inventory
         type: inventory
       project:
         organization:
           name: mbredeme - Default
           type: organization
-        name: AWS Platform
+        name: mbredeme - AWS Platform
         type: project
       execution_environment:
-        name: AWS Platform EE
+        name: mbredeme - AWS Platform EE
         type: execution_environment
       related:
         labels: []
@@ -708,7 +708,7 @@ export_content:
 #        organization:
 #          name: mbredeme - Default
 #          type: organization
-#        name: AWS Running Inventory
+#        name: mbredeme - AWS Running Inventory
 #        type: inventory
 #      project:
 #        organization:
@@ -717,7 +717,7 @@ export_content:
 #        name: DR CasC Bootstrap
 #        type: project
 #      execution_environment:
-#        name: AWS Platform EE
+#        name: mbredeme - AWS Platform EE
 #        type: execution_environment
 #      related:
 #        labels: []
@@ -805,12 +805,12 @@ export_content:
             name: DR_Build_6_Configure Restore AAP from backup WFJT
             type: workflow_job_template
           unified_job_template:
-            name: AWS Running Inventory Source
+            name: mbredeme - AWS Running Inventory Source
             inventory:
               organization:
                 name: mbredeme - Default
                 type: organization
-              name: AWS Running Inventory
+              name: mbredeme - AWS Running Inventory
               type: inventory
             type: inventory_source
           related:
@@ -1052,5 +1052,5 @@ export_content:
           type: credential_type
         type: credential
       natural_key:
-        name: AWS Platform EE
+        name: mbredeme - AWS Platform EE
         type: execution_environment
