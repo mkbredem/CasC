@@ -5,6 +5,9 @@
     - authenticate_controller
 
   tasks:
+    - name: Show import assets
+      debug: "{{ export_content.assets }}"
+
     - name: Import all assets from our export
       ansible.controller.import:
         assets: "{{ export_content.assets }}"
