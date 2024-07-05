@@ -6,5 +6,5 @@
 
   tasks:
     - name: Import all assets from our export
-      awx.awx.import:
+      ansible.controller.import:
         assets: "{{ export_content.assets }}"
