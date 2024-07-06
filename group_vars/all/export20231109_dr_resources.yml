@@ -2,28 +2,28 @@
 export_content:
   changed: false
   assets:
-    organizations:
-    - name: mbredeme - Default
-      description: ''
-      max_hosts: 0
-      default_environment:
-      related:
-        notification_templates: []
-        notification_templates_started: []
-        notification_templates_success: []
-        notification_templates_error: []
-        notification_templates_approvals: []
-        galaxy_credentials:
-        - organization:
-          name: Ansible Galaxy
-          credential_type:
-            name: Ansible Galaxy/Automation Hub API Token
-            kind: galaxy
-            type: credential_type
-          type: credential
-      natural_key:
-        name: mbredeme - Default
-        type: organization
+  #  organizations:
+  #  - name: mbredeme - Default
+  #    description: ''
+  #    max_hosts: 0
+  #    default_environment:
+  #    related:
+  #      notification_templates: []
+  #      notification_templates_started: []
+  #      notification_templates_success: []
+  #      notification_templates_error: []
+  #      notification_templates_approvals: []
+  #      galaxy_credentials:
+  #      - organization:
+  #        name: Ansible Galaxy
+  #        credential_type:
+  #          name: Ansible Galaxy/Automation Hub API Token
+  #          kind: galaxy
+  #          type: credential_type
+  #        type: credential
+  #    natural_key:
+  #      name: mbredeme - Default
+  #      type: organization
 
     credential_types:
 #    - name: mbredeme - AWS Key
