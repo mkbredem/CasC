@@ -95,6 +95,8 @@ export_content:
         type: user
       natural_key:
         organization:
+          name: mbredeme - Default
+          type: organization
         name: mbredeme - AWS Credential
         credential_type:
           name: Amazon Web Services
