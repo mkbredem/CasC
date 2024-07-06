@@ -78,31 +78,31 @@ export_content:
         type: credential_type
 
     credentials:
-    - name: mbredeme - AWS Credential
-      description: ''
-      organization: 
-        name: mbredeme - Default
-        type: organization
-      inputs:
-        password: "{{AWS_SECRET_ACCESS_KEY}}"
-        username: "{{AWS_ACCESS_KEY_ID}}"
-      credential_type:
-        name: Amazon Web Services
-        kind: cloud
-        type: credential_type
-      user:
-        username: admin
-        type: user
-      natural_key:
-        organization:
-          name: mbredeme - Default
-          type: organization
-        name: mbredeme - AWS Credential
-        credential_type:
-          name: Amazon Web Services
-          kind: cloud
-          type: credential_type
-        type: credential
+    #- name: mbredeme - AWS Credential
+    #  description: ''
+    #  organization: 
+    #    name: mbredeme - Default
+    #    type: organization
+    #  inputs:
+    #    password: "{{AWS_SECRET_ACCESS_KEY}}"
+    #    username: "{{AWS_ACCESS_KEY_ID}}"
+    #  credential_type:
+    #    name: Amazon Web Services
+    #    kind: cloud
+    #    type: credential_type
+    #  user:
+    #    username: admin
+    #    type: user
+    #  natural_key:
+    #    organization:
+    #      name: mbredeme - Default
+    #      type: organization
+    #    name: mbredeme - AWS Credential
+    #    credential_type:
+    #      name: Amazon Web Services
+    #      kind: cloud
+    #      type: credential_type
+    #    type: credential
 #    - name: mbredeme - AWS Vault
 #      description: ''
 #      inputs:
