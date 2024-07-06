@@ -201,81 +201,81 @@ export_content:
         name: mbredeme - AWS Platform
         type: project
 
-    inventory:
-    - name: mbredeme - AWS Running Inventory
-      description: ''
-      kind: ''
-      host_filter:
-      variables: "---"
-      organization:
-        name: mbredeme - Default
-        type: organization
-#      related: 
-      natural_key:
-        organization:
-          name: mbredeme - Default
-          type: organization
-        name: mbredeme - AWS Running Inventory
-        type: inventory
+    #inventory:
+    #- name: mbredeme - AWS Running Inventory
+    #  description: ''
+    #  kind: ''
+    #  host_filter:
+    #  variables: "---"
+    #  organization:
+    #    name: mbredeme - Default
+    #    type: organization
+#   #   related: 
+    #  natural_key:
+    #    organization:
+    #      name: mbredeme - Default
+    #      type: organization
+    #    name: mbredeme - AWS Running Inventory
+    #    type: inventory
 
-    inventory_sources:
-    - name: mbredeme - AWS Running Inventory Source
-      description: ''
-      source: ec2
-      source_path: ''
-      source_vars: |-
-        ---
-        plugin: amazon.aws.aws_ec2
-        regions:
-          - us-east-1
-        filters:
-          # All instances with their state as `running`
-          instance-state-name: running
-        keyed_groups:
-          - key: tags.Name
-            separator: ''
-      enabled_var: ''
-      enabled_value: ''
-      host_filter: ''
-      overwrite: true
-      overwrite_vars: false
-      timeout: 0
-      verbosity: 1
-      update_on_launch: true
-      update_cache_timeout: 0
-      source_project:
-      update_on_project_update: false
-      credential:
-        organization: mbredeme - Default
-        name: mbredeme - AWS Credential
-        credential_type:
-          name: Amazon Web Services
-          kind: cloud
-          type: credential_type
-        type: credential
-      execution_environment:
-        name: mbredeme - AWS Platform EE
-        type: execution_environment
-      inventory:
-        organization:
-          name: mbredeme - Default
-          type: organization
-        name: mbredeme - AWS Running Inventory
-        type: inventory
+    #inventory_sources:
+    #- name: mbredeme - AWS Running Inventory Source
+    #  description: ''
+    #  source: ec2
+    #  source_path: ''
+    #  source_vars: |-
+    #    ---
+    #    plugin: amazon.aws.aws_ec2
+    #    regions:
+    #      - us-east-1
+    #    filters:
+    #      # All instances with their state as `running`
+    #      instance-state-name: running
+    #    keyed_groups:
+    #      - key: tags.Name
+    #        separator: ''
+    #  enabled_var: ''
+    #  enabled_value: ''
+    #  host_filter: ''
+    #  overwrite: true
+    #  overwrite_vars: false
+    #  timeout: 0
+    #  verbosity: 1
+    #  update_on_launch: true
+    #  update_cache_timeout: 0
+    #  source_project:
+    #  update_on_project_update: false
+    #  credential:
+    #    organization: mbredeme - Default
+    #    name: mbredeme - AWS Credential
+    #    credential_type:
+    #      name: Amazon Web Services
+    #      kind: cloud
+    #      type: credential_type
+    #    type: credential
+    #  execution_environment:
+    #    name: mbredeme - AWS Platform EE
+    #    type: execution_environment
+    #  inventory:
+    #    organization:
+    #      name: mbredeme - Default
+    #      type: organization
+    #    name: mbredeme - AWS Running Inventory
+    #    type: inventory
 #      related:
 #        schedules: []
 #        notification_templates_started: []
 #        notification_templates_success: []
 #        notification_templates_error: []
-      natural_key:
-        name: mbredeme - AWS Running Inventory Source
-        inventory:
-          organization:
-            name: mbredeme - Default
-            type: organization
-          name: mbredeme - AWS Running Inventory
-          type: inventory
-        type: inventory_source
+    #  natural_key:
+    #    name: mbredeme - AWS Running Inventory Source
+    #    inventory:
+    #      organization:
+    #        name: mbredeme - Default
+    #        type: organization
+    #      name: mbredeme - AWS Running Inventory
+    #      type: inventory
+    #    type: inventory_source
 
     job_templates:
     - name: mbredeme - DR_Build_2_Build VPC and Controller Infra
