@@ -6,7 +6,7 @@
       include_role: 
         name: authenticate_controller
 
-    - name: Export all inventories
+    - name: Export all Assets
       ansible.controller.export:
         all: True
         controller_host: "{{ vault_controller_hostname }}"
