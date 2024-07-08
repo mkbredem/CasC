@@ -7,7 +7,7 @@
         name: authenticate_controller
 
     - name: Export all inventories
-      awx.awx.export:
+      ansible.controller.export:
         all: True
       register: export_content
 
