@@ -12,3 +12,4 @@
         controller_username: "{{ controller_username }}"
         controller_password: "{{ controller_password }}"
         validate_certs: false
+...
