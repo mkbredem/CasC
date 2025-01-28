@@ -2,9 +2,9 @@
   hosts: localhost
 
   tasks:
-    - name: Authenticate into Automation Controller
-      include_role: 
-        name: authenticate_controller
+#    - name: Authenticate into Automation Controller
+#      include_role: 
+#        name: authenticate_controller
 
     - name: Export all Assets
       ansible.controller.export:
