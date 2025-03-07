@@ -16,7 +16,7 @@
       register: export_content
 
     - debug:
-        var: export_content
+        var: export_content.assets
 
     - name: Import Assets
       ansible.controller.import:
