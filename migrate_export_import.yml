@@ -20,7 +20,7 @@
 
     - name: Import Assets
       ansible.controller.import:
-        assets: export_content.assets
+        assets: "{{ export_content.assets }}"
         controller_host: "{{ destination_controller_hostname }}"
         controller_username: "{{ destination_controller_username }}"
         controller_password: "{{ destination_controller_password }}"
