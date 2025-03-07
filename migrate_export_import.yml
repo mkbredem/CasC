@@ -1,0 +1,28 @@
+- name: see if smart inventories included with export task
+  hosts: localhost
+
+  tasks:
+#    - name: Authenticate into Automation Controller
+#      include_role: 
+#        name: authenticate_controller
+
+    - name: Export all Assets
+      ansible.controller.export:
+        all: True
+        controller_host: "{{ source_controller_hostname }}"
+        controller_username: "{{ source_controller_username }}"
+        controller_password: "{{ source_controller_password }}"
+        validate_certs: false
+      register: export_content
+
+    - debug:
+        var: export_content
+
+    - name: Import Assets
+      ansible.controller.import:
+        assets: export_content.assets
+        controller_host: "{{ destination_controller_hostname }}"
+        controller_username: "{{ destination_controller_username }}"
+        controller_password: "{{ destination_controller_password }}"
+        validate_certs: false
+      register: import_content
