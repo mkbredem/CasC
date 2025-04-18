@@ -9,10 +9,6 @@
     - name: Export all Assets
       ansible.controller.export:
         all: True
-        controller_host: "{{ vault_controller_hostname }}"
-        controller_username: "{{ vault_controller_username }}"
-        controller_password: "{{ vault_controller_password }}"
-        validate_certs: false
       register: export_content
 
     - debug:
