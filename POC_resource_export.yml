@@ -1,0 +1,6 @@
+- name: Resource Ansible Product Demo Resources
+  hosts: localhost
+
+  roles:
+      - infra.aap_configuration_extended.filetree_create
+
