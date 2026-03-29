@@ -2,5 +2,5 @@
   hosts: localhost
 
   roles:
-      - infra.aap_configuration_extended.filetree_create
+    - infra.aap_configuration_extended.filetree_create
 
