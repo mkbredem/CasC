@@ -8,6 +8,12 @@
     aap_hostname: "{{ vault_aap_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
     aap_validate_certs: "{{ vault_aap_validate_certs | default(lookup('env', 'CONTROLLER_VERIFY_SSL')) }}"
 
+    export_path: "/tmp/aap_export"
+
+    remote_host: "ec2-54-197-89-65.compute-1.amazonaws.com"
+    remote_user: "ec2-user"
+    remote_dest: "/var/tmp/aap_export"
+
   pre_tasks:
     - name: "Setup authentication (block)"
       block:
