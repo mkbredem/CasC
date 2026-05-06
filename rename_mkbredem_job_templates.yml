@@ -1,0 +1,62 @@
+---
+# Rename three AAP job templates from "mkbredem..." to "mbredeme...".
+#
+# Requirements:
+#   - ansible-galaxy collection install ansible.controller
+#   - Controller connection info provided via env vars or extra-vars:
+#       CONTROLLER_HOST / controller_host
+#       CONTROLLER_USERNAME / controller_username   (or use a token)
+#       CONTROLLER_PASSWORD / controller_password
+#       CONTROLLER_OAUTH_TOKEN / controller_oauthtoken
+#     Set CONTROLLER_VERIFY_SSL=false if your controller uses a self-signed cert.
+#
+# Usage:
+#   ansible-playbook rename_mkbredem_job_templates.yml
+#
+# Dry run (recommended first):
+#   ansible-playbook rename_mkbredem_job_templates.yml --check --diff
+
+- name: Rename mkbredem job templates to mbredeme
+  hosts: localhost
+  gather_facts: false
+  connection: local
+
+  vars:
+    # Each entry: the template's current name and the desired new name.
+    # Listed by controller ID for reference only; the module identifies by name.
+    templates_to_rename:
+      - id: 389
+        name: "mkbredem insights patching"
+        new_name: "mbredeme insights patching"
+      - id: 405
+        name: "mkbredem Provision VM into Azure"
+        new_name: "mbredeme Provision VM into Azure"
+      - id: 593
+        name: "mkbredem - approvals report"
+        new_name: "mbredeme - approvals report"
+
+  tasks:
+    - name: Rename job template "{{ item.name }}" -> "{{ item.new_name }}"
+      ansible.controller.job_template:
+        name: "{{ item.name }}"
+        new_name: "{{ item.new_name }}"
+        state: present
+        # Connection values; fall back to env vars if the var is not set.
+        controller_host: "{{ vault_controller_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
+        controller_username: "{{ vault_controller_username | default(lookup('env', 'CONTROLLER_USERNAME')) | default(omit, true) }}"
+        controller_password: "{{ vault_controller_password | default(lookup('env', 'CONTROLLER_PASSWORD')) | default(omit, true) }}"
+        controller_oauthtoken: "{{ vault_controller_oauthtoken | default(lookup('env', 'CONTROLLER_OAUTH_TOKEN')) | default(omit, true) }}"
+        validate_certs: "{{ (lookup('env', 'CONTROLLER_VERIFY_SSL') | default('true', true)) | bool }}"
+      loop: "{{ templates_to_rename }}"
+      loop_control:
+        label: "{{ item.name }}"
+      register: rename_results
+
+    - name: Show rename results
+      ansible.builtin.debug:
+        msg: >-
+          {{ item.item.name }} -> {{ item.item.new_name }}
+          (changed={{ item.changed }})
+      loop: "{{ rename_results.results }}"
+      loop_control:
+        label: "{{ item.item.name }}"

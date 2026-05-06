@@ -3,10 +3,56 @@
   connection: local
   gather_facts: false
   vars:
-    aap_username: "{{ lookup('env', 'CONTROLLER_HOST') }}"
-    aap_password: "{{ lookup('env', 'CONTROLLER_PASSWORD') }}"
-    aap_hostname: "{{ lookup('env', 'CONTROLLER_HOST') }}"
-    aap_validate_certs: "{{ lookup('env', 'CONTROLLER_VERIFY_SSL') }}"
+    aap_username: "{{ vault_controller_username }}"
+    aap_password: "{{ vault_controller_password }}"
+    aap_hostname: "{{ vault_controller_hostname  }}"
+    aap_validate_certs: "{{ vault_controller_validate_certs }}"
+    controller_validate_certs: "{{ aap_validate_certs }}"
+    organization_filter: "Ansible Product Demos (APD)"
+    flatten_output: True
+    input_tag:
+#      - all
+      - controller_settings
+      - controller_credentials
+      - controller_credential_types
+      - controller_execution_environments
+      - controller_groups
+      - controller_hosts
+      - controller_inventories
+      - controller_inventory_sources
+      - controller_job_templates
+      - controller_notification_templates
+      - controller_organizations
+      - controller_projects
+      - controller_roles
+      - controller_teams
+      - controller_users
+      - controller_workflow_job_templates
+      - controller_instance_groups
+#      - controller_applications
+      - controller_labels
+      - controller_schedules
+      - controller_gateway_authenticator
+      - controller_gateway_authenticator_maps
+#      - gateway_applications
+#      - gateway_authenticator_maps
+#      - gateway_authenticators
+#      - gateway_http_ports
+#      - gateway_organizations
+#      - gateway_role_user_assignments
+#      - gateway_routes
+#      - gateway_service_clusters
+#      - gateway_service_keys
+#      - gateway_service_nodes
+#      - gateway_services
+#      - gateway_settings
+#      - gateway_teams
+#      - gateway_users    
+
+    #aap_username: "{{ lookup('env', 'CONTROLLER_HOST') }}"
+    #aap_password: "{{ lookup('env', 'CONTROLLER_PASSWORD') }}"
+    #aap_hostname: "{{ lookup('env', 'CONTROLLER_HOST') }}"
+    #aap_validate_certs: "{{ lookup('env', 'CONTROLLER_VERIFY_SSL') }}"
 
     export_path: "/tmp/aap_export"
 
@@ -36,6 +82,11 @@
       when: aap_oauthtoken is not defined
       tags:
         - always
+
+    - name: Map AAP token to controller token
+      ansible.builtin.set_fact:
+        controller_oauthtoken: "{{ aap_oauthtoken }}"
+        controller_oauthtoken_url: "{{ aap_oauthtoken_url }}"
 
   roles:
     - infra.aap_configuration_extended.filetree_create
