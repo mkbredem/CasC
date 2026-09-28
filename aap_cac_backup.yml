@@ -1,0 +1,366 @@
+---
+# =============================================================================
+# aap_cac_backup.yml
+#
+# Export the configuration of an AAP 2.7 platform as Configuration as Code
+# (CaC) YAML with infra.aap_configuration_extended.filetree_create, package the
+# exported directory as a .tar.gz archive, and copy that archive to a backup
+# host in the job's inventory so the backup survives after the execution
+# environment container is removed at the end of the job.
+#
+# What this backup contains and does not contain
+#   - Contains: organizations, teams, users, role assignments, authenticators,
+#     credential types, credentials (without secret values), projects,
+#     inventories, job templates, workflow job templates, schedules, execution
+#     environments, notification templates, settings.
+#   - Does NOT contain credential secret values. With secrets_as_variables:
+#     true, every secret field is written as a variable reference such as
+#     "{{ vaulted_controller_credentials_my_cred_password }}". Keep the real
+#     values in an Ansible Vault file or an external secret manager and supply
+#     them at restore time.
+#   - Does NOT contain job history or the activity stream. The installer
+#     backup (ansible.containerized_installer.backup) is the full-data backup.
+#
+# How the job runs
+#   Play 1  localhost (inside the execution environment): obtain an API token,
+#           run filetree_create, create the .tar.gz archive, delete the token.
+#   Play 2  backup host(s) in the inventory: create the backup directory, copy
+#           the archive, delete archives older than the retention count.
+#   Play 3  localhost: delete the temporary export directory in the execution
+#           environment.
+#
+# -----------------------------------------------------------------------------
+# STEPS TO PERFORM IN AAP 2.7 (one time)
+# -----------------------------------------------------------------------------
+#
+# 1. Put the content in Git
+#    Commit this file and collections/requirements.yml to the Git repository
+#    that the project in step 7 points at. AAP installs the collections listed
+#    in collections/requirements.yml each time the project syncs.
+#
+# 2. Give the organization access to the collections
+#    Automation Execution > Organizations > <your organization> > Edit >
+#    Galaxy credentials. Attach, in this order:
+#      a. Automation Hub certified repository credential (for ansible.platform,
+#         ansible.controller, ansible.hub, ansible.eda)
+#      b. Automation Hub validated repository credential (for infra.* content)
+#      c. Ansible Galaxy credential (fallback source for infra.* content)
+#    Docs: https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects
+#
+# 3. Create a service account for the export
+#    Access Management > Users > Create user, for example "svc-cac-backup".
+#    Access Management > Users > svc-cac-backup > Roles > Add roles, and assign
+#    "Platform Auditor". Platform Auditor can read every object and change
+#    none. If an object type exports empty, check whether that object type is
+#    visible to Platform Auditor before granting a broader role.
+#    Keep this account local (not SAML or LDAP) so a change in the identity
+#    provider does not stop the backup.
+#
+# 4. Create a credential type that passes the API connection to the playbook
+#    Automation Execution > Infrastructure > Credential Types > Create.
+#    Name: "AAP CaC Export"
+#    Input configuration:
+#      fields:
+#        - id: aap_hostname
+#          type: string
+#          label: Platform gateway URL (for example https://aap.example.com)
+#        - id: aap_username
+#          type: string
+#          label: Username
+#        - id: aap_password
+#          type: string
+#          label: Password
+#          secret: true
+#        - id: aap_validate_certs
+#          type: boolean
+#          label: Validate TLS certificates
+#      required:
+#        - aap_hostname
+#        - aap_username
+#        - aap_password
+#    Injector configuration:
+#      env:
+#        AAP_HOSTNAME: "{{ aap_hostname }}"
+#        AAP_USERNAME: "{{ aap_username }}"
+#        AAP_PASSWORD: "{{ aap_password }}"
+#        AAP_VALIDATE_CERTS: "{{ aap_validate_certs }}"
+#    Docs: https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_custom_credentials
+#
+# 5. Create the credentials
+#    Automation Execution > Infrastructure > Credentials > Create.
+#      a. Type "AAP CaC Export": the gateway URL (not a controller URL; 2.7
+#         routes all API traffic through platform gateway) and the
+#         svc-cac-backup username and password.
+#      b. Type "Machine": the SSH user and key for the backup host. Enable
+#         privilege escalation only if backup_dir below is not writable by
+#         that user.
+#
+# 6. Create the inventory for the backup host
+#    Automation Execution > Infrastructure > Inventories > Create inventory,
+#    for example "CaC Backup Targets". Add a group named "cac_backup_hosts"
+#    and add the backup host to that group. The playbook targets that group
+#    by default; override it with the backup_hosts extra variable.
+#
+# 7. Create the project
+#    Automation Execution > Projects > Create project.
+#    Source control type: Git, URL of the repository from step 1, the source
+#    control credential if the repository is private. Sync the project and
+#    check the sync job output for the collection installation from
+#    collections/requirements.yml.
+#
+# 8. Create the job template
+#    Automation Execution > Templates > Create template > Create job template.
+#      Name:                   AAP CaC Backup
+#      Inventory:              CaC Backup Targets
+#      Project:                the project from step 7
+#      Playbook:               aap_cac_backup.yml
+#      Execution environment:  Default execution environment (the collections
+#                              come from the project, so no custom EE is
+#                              needed)
+#      Credentials:            the "AAP CaC Export" credential and the Machine
+#                              credential from step 5
+#      Extra variables (optional overrides):
+#        backup_dir: /srv/backups/aap-cac
+#        backup_retention_count: 14
+#        organization_filter: ""     # set to one organization name to export
+#                                    # only that organization
+#    Docs: https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-proc_controller_create_job_template
+#
+# 9. Schedule the job template
+#    AAP CaC Backup > Schedules > Create schedule, for example daily at 01:45.
+#    Docs: https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_schedules
+#
+# 10. Add a failure notification (recommended)
+#     AAP CaC Backup > Notifications > enable a notifier on "Failure" so a
+#     backup that stops running is noticed.
+#     Docs: https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/observe-assembly_ug_controller_notifications
+#
+# 11. Test a restore
+#     Extract one archive on a workstation, then load it into a non-production
+#     AAP 2.7 instance with infra.aap_configuration_extended.filetree_read
+#     followed by infra.aap_configuration.dispatch, supplying the secret
+#     values from Ansible Vault. Known filetree_create 4.11 export defects on
+#     2.7 that the restore test will show:
+#       - Execution environments with no organization (for example "Default
+#         execution environment") are not exported (redhat-cop issue
+#         aap_configuration_extended#399).
+#       - The "Ad Hoc" team role is exported as ad_hoc; the import role
+#         expects adhoc (aap_configuration_extended#390).
+#       - Inventory-update schedules are exported with an inventory field that
+#         the import rejects with HTTP 400 (infra.aap_configuration#1455).
+#
+# Support note: ansible.platform, ansible.controller, ansible.hub and
+# ansible.eda are Red Hat certified and supported. infra.aap_configuration and
+# infra.aap_configuration_extended are Red Hat Communities of Practice content
+# (GPL-3.0) with no support entitlement.
+# =============================================================================
+
+- name: Export AAP configuration as code and create the archive
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    # Connection values come from the "AAP CaC Export" credential (step 4).
+    # The CONTROLLER_* names are a fallback for the built-in credential type.
+    aap_gateway_url: >-
+      {{ lookup('ansible.builtin.env', 'AAP_HOSTNAME')
+         | default(lookup('ansible.builtin.env', 'CONTROLLER_HOST'), true) }}
+    # filetree_create builds URLs as https://<aap_hostname>/..., so the
+    # scheme and any trailing slash are removed here.
+    aap_hostname: "{{ aap_gateway_url | regex_replace('^https?://', '') | regex_replace('/+$', '') }}"
+    aap_username: >-
+      {{ lookup('ansible.builtin.env', 'AAP_USERNAME')
+         | default(lookup('ansible.builtin.env', 'CONTROLLER_USERNAME'), true) }}
+    aap_password: >-
+      {{ lookup('ansible.builtin.env', 'AAP_PASSWORD')
+         | default(lookup('ansible.builtin.env', 'CONTROLLER_PASSWORD'), true) }}
+    aap_validate_certs: >-
+      {{ lookup('ansible.builtin.env', 'AAP_VALIDATE_CERTS')
+         | default(lookup('ansible.builtin.env', 'CONTROLLER_VERIFY_SSL'), true)
+         | default(true, true) | bool }}
+
+    # filetree_create settings
+    omit_id: true                 # write names, not database IDs
+    secrets_as_variables: true    # write secret fields as variable references
+    flatten_output: false         # one directory per organization and type
+    # organization_filter: "Default"   # uncomment to export one organization
+
+    backup_name_prefix: aap-cac
+
+  pre_tasks:
+    - name: Fail early when the API connection values are missing
+      ansible.builtin.assert:
+        that:
+          - aap_hostname | length > 0
+          - aap_username | length > 0
+          - aap_password | length > 0
+        fail_msg: >-
+          AAP_HOSTNAME, AAP_USERNAME or AAP_PASSWORD is empty. Attach the
+          "AAP CaC Export" credential to the job template (steps 4, 5 and 8).
+        quiet: true
+
+    - name: Fail early when the inventory has no backup host
+      ansible.builtin.assert:
+        that:
+          - groups[backup_hosts | default('cac_backup_hosts')] | default([]) | length > 0
+        fail_msg: >-
+          The inventory has no hosts in group
+          "{{ backup_hosts | default('cac_backup_hosts') }}", so the archive
+          would be lost when the execution environment is removed (step 6).
+        quiet: true
+
+    - name: Create a temporary directory for the export
+      ansible.builtin.tempfile:
+        state: directory
+        prefix: "{{ backup_name_prefix }}-"
+      register: export_tmp
+
+    - name: Set the export directory and archive names
+      ansible.builtin.set_fact:
+        backup_timestamp: "{{ now(utc=true).strftime('%Y%m%dT%H%M%SZ') }}"
+        output_path: "{{ export_tmp.path }}/{{ backup_name_prefix }}"
+        # Recorded as facts on localhost so play 2 can read them from hostvars.
+
+    - name: Set the archive path
+      ansible.builtin.set_fact:
+        backup_archive_name: "{{ backup_name_prefix }}-{{ backup_timestamp }}.tar.gz"
+        backup_archive_path: "{{ export_tmp.path }}/{{ backup_name_prefix }}-{{ backup_timestamp }}.tar.gz"
+
+    - name: Request an API token from platform gateway
+      ansible.builtin.uri:
+        url: "https://{{ aap_hostname }}/api/gateway/v1/tokens/"
+        method: POST
+        user: "{{ aap_username }}"
+        password: "{{ aap_password }}"
+        force_basic_auth: true
+        validate_certs: "{{ aap_validate_certs }}"
+        body_format: json
+        body:
+          description: "CaC backup job {{ lookup('ansible.builtin.env', 'JOB_ID') | default('manual', true) }}"
+          scope: read
+        status_code: 201
+      register: authtoken_res
+      no_log: true
+
+    - name: Pass the token to the collection modules
+      ansible.builtin.set_fact:
+        aap_token: "{{ authtoken_res.json.token }}"        # ansible.platform / infra.aap_configuration name
+        aap_oauthtoken: "{{ authtoken_res.json.token }}"   # name used in the filetree_create README
+        aap_oauthtoken_url: "{{ authtoken_res.json.url }}"
+      no_log: true
+
+  roles:
+    - role: infra.aap_configuration_extended.filetree_create
+
+  post_tasks:
+    - name: Create the .tar.gz archive of the export
+      ansible.builtin.command:
+        cmd: >-
+          tar -czf {{ backup_archive_path | quote }}
+          -C {{ export_tmp.path | quote }} {{ backup_name_prefix | quote }}
+        creates: "{{ backup_archive_path }}"
+
+    - name: Read the archive size for the job output
+      ansible.builtin.stat:
+        path: "{{ backup_archive_path }}"
+        get_checksum: true
+        checksum_algorithm: sha256
+      register: archive_stat
+
+    - name: Fail when the archive is missing or empty
+      ansible.builtin.assert:
+        that:
+          - archive_stat.stat.exists
+          - archive_stat.stat.size > 0
+        fail_msg: "The archive {{ backup_archive_path }} was not created."
+        quiet: true
+
+    - name: Show the archive details
+      ansible.builtin.debug:
+        msg: >-
+          Created {{ backup_archive_name }}
+          ({{ archive_stat.stat.size | human_readable }},
+          sha256 {{ archive_stat.stat.checksum }})
+
+    - name: Record the checksum for play 2
+      ansible.builtin.set_fact:
+        backup_archive_sha256: "{{ archive_stat.stat.checksum }}"
+
+    - name: Delete the API token
+      ansible.builtin.uri:
+        url: "https://{{ aap_hostname }}{{ aap_oauthtoken_url }}"
+        method: DELETE
+        user: "{{ aap_username }}"
+        password: "{{ aap_password }}"
+        force_basic_auth: true
+        validate_certs: "{{ aap_validate_certs }}"
+        status_code: 204
+      when: aap_oauthtoken_url is defined
+      no_log: true
+
+
+- name: Copy the archive to the backup host
+  hosts: "{{ backup_hosts | default('cac_backup_hosts') }}"
+  gather_facts: false
+
+  vars:
+    backup_dir: /srv/backups/aap-cac
+    backup_retention_count: 14          # number of archives to keep on each host
+    backup_file_mode: "0640"
+    export_facts: "{{ hostvars['localhost'] }}"
+
+  tasks:
+    - name: Create the backup directory
+      ansible.builtin.file:
+        path: "{{ backup_dir }}"
+        state: directory
+        mode: "0750"
+
+    - name: Copy the archive from the execution environment to the backup host
+      ansible.builtin.copy:
+        src: "{{ export_facts.backup_archive_path }}"
+        dest: "{{ backup_dir }}/{{ export_facts.backup_archive_name }}"
+        mode: "{{ backup_file_mode }}"
+        checksum: "{{ export_facts.backup_archive_sha256 }}"
+
+    - name: Write the checksum file next to the archive
+      ansible.builtin.copy:
+        content: "{{ export_facts.backup_archive_sha256 }}  {{ export_facts.backup_archive_name }}\n"
+        dest: "{{ backup_dir }}/{{ export_facts.backup_archive_name }}.sha256"
+        mode: "{{ backup_file_mode }}"
+
+    - name: Find the existing archives
+      ansible.builtin.find:
+        paths: "{{ backup_dir }}"
+        patterns: "{{ export_facts.backup_name_prefix }}-*.tar.gz"
+      register: existing_archives
+
+    - name: List the archives beyond the retention count, newest first
+      ansible.builtin.set_fact:
+        expired_archives: >-
+          {{ (existing_archives.files
+              | sort(attribute='mtime', reverse=true)
+              | map(attribute='path') | list)[backup_retention_count | int:] }}
+
+    - name: Delete each expired archive and its checksum file
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop: "{{ expired_archives + (expired_archives | map('regex_replace', '$', '.sha256') | list) }}"
+      loop_control:
+        label: "{{ item | basename }}"
+
+
+- name: Remove the temporary export from the execution environment
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Delete the temporary export directory
+      ansible.builtin.file:
+        path: "{{ export_tmp.path }}"
+        state: absent
+      when: export_tmp.path is defined
+...
