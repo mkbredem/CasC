@@ -275,15 +275,15 @@
             aap_oauthtoken_url: "{{ authtoken_res.json.url }}"
           no_log: true
 
+        # import_role (static), not include_role (dynamic). filetree_create's
+        # tasks/main.yml has tags: "{{ valid_tags }}" on an include_tasks, and
+        # valid_tags lives in the role's defaults/main.yml. include_role
+        # templates that tags line before the role defaults are loaded and
+        # fails with "'valid_tags' is undefined". The block's delegate_to,
+        # run_once and connection vars apply to the imported tasks.
         - name: Run filetree_create
-          ansible.builtin.include_role:
+          ansible.builtin.import_role:
             name: infra.aap_configuration_extended.filetree_create
-            apply:
-              delegate_to: localhost
-              run_once: true
-              vars:
-                ansible_connection: local
-                ansible_python_interpreter: "{{ ansible_playbook_python }}"
 
         - name: Create the .tar.gz archive of the export
           ansible.builtin.command:
