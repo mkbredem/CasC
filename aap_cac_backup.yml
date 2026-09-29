@@ -105,9 +105,11 @@
 #         credential. Option B: type "AAP CaC Export" with the gateway URL (not a controller URL; 2.7
 #         routes all API traffic through platform gateway) and the
 #         svc-cac-backup username and password.
-#      b. Type "Machine": the SSH user and key for the backup host. Enable
-#         privilege escalation only if backup_dir below is not writable by
-#         that user.
+#      b. Type "Machine": the SSH user and key for the backup host. That
+#         user needs sudo on the backup host: the backup-host tasks run with
+#         become (backup_become: true) so they can write under /srv. Set the
+#         privilege escalation password in the credential if sudo asks for
+#         one. Set backup_become: false if backup_dir is writable without sudo.
 #
 # 6. Create the inventory for the backup host
 #    Automation Execution > Infrastructure > Inventories > Create inventory,
@@ -183,6 +185,7 @@
     backup_dir: /srv/backups/aap-cac
     backup_retention_count: 14          # number of archives to keep per host
     backup_file_mode: "0640"
+    backup_become: true                 # use sudo on the backup host
     backup_name_prefix: aap-cac
 
     # --- API connection ----------------------------------------------------
@@ -212,6 +215,40 @@
     secrets_as_variables: true    # write secret fields as variable references
     flatten_output: false         # one directory per organization and type
     # organization_filter: "Default"   # uncomment to export one organization
+
+    # Object types to export. Every filetree_create tag except
+    # controller_teams (plus the "all" and "controller" group tags that would
+    # pull it back in). The controller_teams export also reads each team's
+    # legacy controller roles (/api/controller/v2/teams/<id>/roles/), and in
+    # filetree_create 4.11.0 that task fails with "'dict object' has no
+    # attribute 'resource_name'" when a team role has no resource name. On
+    # AAP 2.7, teams and team role assignments belong to platform gateway and
+    # are exported by gateway_teams and gateway_role_team_assignments below.
+    # Override with -e '{"input_tag": ["gateway_teams"]}' to export one type.
+    input_tag:
+      - controller_settings
+      - controller_credentials
+      - controller_credential_types
+      - controller_execution_environments
+      - controller_groups
+      - controller_hosts
+      - controller_inventories
+      - controller_inventory_sources
+      - controller_job_templates
+      - controller_notification_templates
+      - controller_organizations
+      - controller_projects
+      - controller_roles
+      - controller_users
+      - controller_workflow_job_templates
+      - controller_instance_groups
+      - controller_instances
+      - controller_applications
+      - controller_labels
+      - controller_schedules
+      - gateway
+      - eda
+      - hub
 
   tasks:
     # ---------------------------------------------------------------------
@@ -334,60 +371,67 @@
     # ---------------------------------------------------------------------
     # 2. Copy the archive to each backup host
     # ---------------------------------------------------------------------
-    - name: Create the backup directory
-      ansible.builtin.file:
-        path: "{{ backup_dir }}"
-        state: directory
-        mode: "0750"
+    - name: Store the archive on the backup host
+      # The backup directory is under /srv, so these tasks use sudo on the
+      # backup host. Set backup_become: false if backup_dir is writable by
+      # the Machine credential user. The export tasks above run in the
+      # execution environment and never use become.
+      become: "{{ backup_become }}"
+      block:
+        - name: Create the backup directory
+          ansible.builtin.file:
+            path: "{{ backup_dir }}"
+            state: directory
+            mode: "0750"
 
-    - name: Copy the archive from the execution environment to the backup host
-      ansible.builtin.copy:
-        src: "{{ backup_archive_path }}"
-        dest: "{{ backup_dir }}/{{ backup_archive_name }}"
-        mode: "{{ backup_file_mode }}"
+        - name: Copy the archive from the execution environment to the backup host
+          ansible.builtin.copy:
+            src: "{{ backup_archive_path }}"
+            dest: "{{ backup_dir }}/{{ backup_archive_name }}"
+            mode: "{{ backup_file_mode }}"
 
-    - name: Read the SHA-256 checksum of the copied archive
-      ansible.builtin.stat:
-        path: "{{ backup_dir }}/{{ backup_archive_name }}"
-        get_checksum: true
-        checksum_algorithm: sha256
-      register: copied_stat
+        - name: Read the SHA-256 checksum of the copied archive
+          ansible.builtin.stat:
+            path: "{{ backup_dir }}/{{ backup_archive_name }}"
+            get_checksum: true
+            checksum_algorithm: sha256
+          register: copied_stat
 
-    - name: Fail when the copied archive does not match the original
-      ansible.builtin.assert:
-        that:
-          - copied_stat.stat.checksum == backup_archive_sha256
-        fail_msg: >-
-          The archive on {{ inventory_hostname }} has SHA-256
-          {{ copied_stat.stat.checksum }}, expected {{ backup_archive_sha256 }}.
-        quiet: true
+        - name: Fail when the copied archive does not match the original
+          ansible.builtin.assert:
+            that:
+              - copied_stat.stat.checksum == backup_archive_sha256
+            fail_msg: >-
+              The archive on {{ inventory_hostname }} has SHA-256
+              {{ copied_stat.stat.checksum }}, expected {{ backup_archive_sha256 }}.
+            quiet: true
 
-    - name: Write the checksum file next to the archive
-      ansible.builtin.copy:
-        content: "{{ backup_archive_sha256 }}  {{ backup_archive_name }}\n"
-        dest: "{{ backup_dir }}/{{ backup_archive_name }}.sha256"
-        mode: "{{ backup_file_mode }}"
+        - name: Write the checksum file next to the archive
+          ansible.builtin.copy:
+            content: "{{ backup_archive_sha256 }}  {{ backup_archive_name }}\n"
+            dest: "{{ backup_dir }}/{{ backup_archive_name }}.sha256"
+            mode: "{{ backup_file_mode }}"
 
-    - name: Find the existing archives
-      ansible.builtin.find:
-        paths: "{{ backup_dir }}"
-        patterns: "{{ backup_name_prefix }}-*.tar.gz"
-      register: existing_archives
+        - name: Find the existing archives
+          ansible.builtin.find:
+            paths: "{{ backup_dir }}"
+            patterns: "{{ backup_name_prefix }}-*.tar.gz"
+          register: existing_archives
 
-    - name: List the archives beyond the retention count, newest first
-      ansible.builtin.set_fact:
-        expired_archives: >-
-          {{ (existing_archives.files
-              | sort(attribute='mtime', reverse=true)
-              | map(attribute='path') | list)[backup_retention_count | int:] }}
+        - name: List the archives beyond the retention count, newest first
+          ansible.builtin.set_fact:
+            expired_archives: >-
+              {{ (existing_archives.files
+                  | sort(attribute='mtime', reverse=true)
+                  | map(attribute='path') | list)[backup_retention_count | int:] }}
 
-    - name: Delete each expired archive and its checksum file
-      ansible.builtin.file:
-        path: "{{ item }}"
-        state: absent
-      loop: "{{ expired_archives + (expired_archives | map('regex_replace', '$', '.sha256') | list) }}"
-      loop_control:
-        label: "{{ item | basename }}"
+        - name: Delete each expired archive and its checksum file
+          ansible.builtin.file:
+            path: "{{ item }}"
+            state: absent
+          loop: "{{ expired_archives + (expired_archives | map('regex_replace', '$', '.sha256') | list) }}"
+          loop_control:
+            label: "{{ item | basename }}"
 
     # ---------------------------------------------------------------------
     # 3. Remove the temporary export from the execution environment
